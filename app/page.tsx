@@ -19,7 +19,7 @@ import { Menu, X, ShoppingCart, Phone } from "lucide-react";
   - /public/logo.png -> add your logo image or keep the text logo
 */
 
-const WHATSAPP_NUMBER = "+972 566766010"; // replace with your number (no +)
+const WHATSAPP_NUMBER = "+972566766010"; // replace with your number (no +)
 const CONTACT_EMAIL = "mdrocktrader@gmail.com"; // replace with your email
 
 const PRODUCTS = [
