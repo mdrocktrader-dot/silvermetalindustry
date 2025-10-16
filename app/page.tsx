@@ -543,9 +543,6 @@ function SeoHead() {
   );
 }
 
-// ==============================
-// NAVBAR
-// ==============================
 function Navbar({ onOpenMenu, orderCount, scrollToOrder }) {
   return (
     <header className="w-full bg-white/90 backdrop-blur sticky top-0 z-50 border-b">
@@ -558,24 +555,41 @@ function Navbar({ onOpenMenu, orderCount, scrollToOrder }) {
           </div>
         </a>
         <nav className="hidden md:flex items-center gap-6 text-sm">
-          <a href="#products" className="hover:text-slate-900">Products</a>
-          <a href="#order" className="hover:text-slate-900">Order</a>
+          <a href="#products" className="hover:text-slate-900">
+            Products
+          </a>
+          <a href="#order" className="hover:text-slate-900">
+            Order
+          </a>
           <button onClick={scrollToOrder} className="relative">
             <ShoppingCart size={20} />
             {orderCount > 0 && (
-              <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">{orderCount}</span>
+              <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                {orderCount}
+              </span>
             )}
           </button>
-          <a href={`https://wa.me/${COMPANY.whatsapp}`} target="_blank" className="px-4 py-2 bg-green-600 text-white rounded-md">WhatsApp</a>
+          <a
+            href={`https://wa.me/${COMPANY.whatsapp}`}
+            target="_blank"
+            rel="noreferrer"
+            className="px-4 py-2 bg-green-600 text-white rounded-md"
+          >
+            WhatsApp
+          </a>
         </nav>
         <div className="flex md:hidden items-center gap-3">
           <button onClick={scrollToOrder} className="relative">
             <ShoppingCart size={20} />
             {orderCount > 0 && (
-              <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">{orderCount}</span>
+              <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                {orderCount}
+              </span>
             )}
           </button>
-          <button className="border rounded-md p-2" onClick={onOpenMenu}><Menu size={20} /></button>
+          <button className="border rounded-md p-2" onClick={onOpenMenu}>
+            <Menu size={20} />
+          </button>
         </div>
       </div>
     </header>
@@ -637,6 +651,200 @@ function Hero() {
   );
 }
 
+// // ==============================
+// // PRODUCT CATALOG
+// // ==============================
+// function ProductCatalog({ orderItems, setOrderItems }) {
+//   const [category, setCategory] = useState("All");
+//   const [search, setSearch] = useState("");
+//   const [sort, setSort] = useState("");
+//   const [specOpen, setSpecOpen] = useState({});
+
+//   const filtered = useMemo(() => {
+//     let list = PRODUCTS.filter(
+//       (p) =>
+//         (category === "All" || p.category === category) &&
+//         p.name.toLowerCase().includes(search.toLowerCase())
+//     );
+//     if (sort === "low") list = [...list].sort((a, b) => a.price - b.price);
+//     if (sort === "high") list = [...list].sort((a, b) => b.price - a.price);
+//     return list;
+//   }, [category, search, sort]);
+
+//   const handleAddToCart = (product) => {
+//     const qty = parseInt(prompt(`Enter quantity for ${product.name}:`, "1") || "0");
+//     if (!qty || qty < 1) return;
+
+//     let price = product.price;
+//     if (product.bulkPricing) {
+//       for (let tier of product.bulkPricing) {
+//         if (qty >= tier.min && qty <= tier.max) price = tier.price;
+//       }
+//       const lastTier = product.bulkPricing[product.bulkPricing.length - 1];
+//       if (qty > lastTier.max) price = lastTier.price;
+//     }
+
+//     const existing = orderItems.find((item) => item.id === product.id);
+//     if (existing) {
+//       setOrderItems(orderItems.map((item) => item.id === product.id ? { ...item, quantity: item.quantity + qty, price } : item));
+//     } else {
+//       setOrderItems([...orderItems, { ...product, quantity: qty, price }]);
+//     }
+//     alert(`${product.name} added to cart`);
+//   };
+
+//   return (
+//     <section id="products" className="max-w-7xl mx-auto px-6 py-20">
+//       <h2 className="text-3xl font-bold text-center mb-10">Our Products</h2>
+
+//       {/* Filter & Search */}
+//       <div className="flex flex-wrap justify-between gap-4 items-center mb-10">
+//         <div className="flex flex-wrap gap-2">
+//           {CATEGORIES.map((c) => (
+//             <button
+//               key={c}
+//               onClick={() => setCategory(c)}
+//               className={`px-4 py-2 rounded-full border transition ${
+//                 c === category
+//                   ? "bg-green-600 text-white border-green-600"
+//                   : "border-slate-300 hover:bg-slate-100"
+//               }`}
+//             >
+//               {c}
+//             </button>
+//           ))}
+//         </div>
+//         <div className="flex gap-3 items-center">
+//           <div className="flex items-center border rounded-md px-2">
+//             <Search size={16} className="text-slate-500" />
+//             <input
+//               type="text"
+//               placeholder="Search product..."
+//               value={search}
+//               onChange={(e) => setSearch(e.target.value)}
+//               className="p-2 outline-none text-sm"
+//             />
+//           </div>
+//           <select
+//             className="border rounded-md p-2 text-sm"
+//             value={sort}
+//             onChange={(e) => setSort(e.target.value)}
+//           >
+//             <option value="">Sort by</option>
+//             <option value="low">Price: Low → High</option>
+//             <option value="high">Price: High → Low</option>
+//           </select>
+//         </div>
+//       </div>
+
+//       <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+//         <AnimatePresence>
+//           {filtered.map((p) => (
+//             <motion.div
+//               key={p.id}
+//               layout
+//               initial={{ opacity: 0, scale: 0.9 }}
+//               animate={{ opacity: 1, scale: 1 }}
+//               exit={{ opacity: 0 }}
+//               className="border rounded-xl overflow-hidden shadow hover:shadow-lg transition"
+//             >
+//               <Zoom>
+//                 <img src={p.img} alt={p.name} className="h-44 w-full object-cover cursor-zoom-in" />
+//               </Zoom>
+
+//               {/* Multiple images */}
+//               {p.images && p.images.length > 0 && (
+//                 <div className="flex gap-2 mt-2 overflow-x-auto px-2">
+//                   {p.images.map((img, idx) => (
+//                     <Zoom key={idx}>
+//                       <img src={img} alt={`${p.name}-${idx}`} className="h-20 w-20 object-cover rounded cursor-zoom-in" />
+//                     </Zoom>
+//                   ))}
+//                 </div>
+//               )}
+
+//               <div className="p-4">
+//                 <h3 className="font-semibold text-lg">{p.name}</h3>
+//                 <p className="text-sm text-slate-500 mt-1">{p.category}</p>
+//                 <p className="text-green-600 font-bold mt-2">AED {p.price}</p>
+
+//                 {/* Bulk pricing display */}
+//                 {p.bulkPricing && (
+//                   <div className="text-sm text-slate-600 mt-2">
+//                     <strong>Bulk Pricing:</strong>
+//                     <ul>
+//                       {p.bulkPricing.map((tier, idx) => (
+//                         <li key={idx}>
+//                           {tier.min} - {tier.max}: AED {tier.price}
+//                         </li>
+//                       ))}
+//                     </ul>
+//                   </div>
+//                 )}
+
+//                 {/* Technical specs */}
+//                 {p.specs && (
+//                   <div className="text-sm text-slate-600 mt-2">
+//                     <button
+//                       onClick={() => setSpecOpen({ ...specOpen, [p.id]: !specOpen[p.id] })}
+//                       className="underline text-blue-600 text-sm"
+//                     >
+//                       {specOpen[p.id] ? "Hide Specs" : "Show Specs"}
+//                     </button>
+//                     {specOpen[p.id] && (
+//                       <ul className="mt-1 space-y-1">
+//                         {Object.entries(p.specs).map(([key, val]) => (
+//                           <li key={key}><strong>{key}:</strong> {val}</li>
+//                         ))}
+//                       </ul>
+//                     )}
+//                   </div>
+//                 )}
+
+//                 <div className="mt-4 flex flex-col gap-2">
+//                   {/* WhatsApp Inquire */}
+//                  <a
+//   href={`https://wa.me/${COMPANY.whatsapp}?text=${encodeURIComponent(
+//     `Hello ${COMPANY.name},\nI am interested in this product:\n\nName: ${p.name}\nPrice: AED ${p.price}\nImage: ${typeof window !== "undefined" ? window.location.origin : ""}${p.img}`
+//   )}`}
+//   target="_blank"
+//   className="inline-block w-full text-center bg-green-600 text-white rounded-md py-2 text-sm"
+// >
+//   Inquire on WhatsApp
+// </a>
+
+//                   {/* Email Inquire */}
+//                   <a
+//                     href={`mailto:${COMPANY.email}?subject=Inquiry about ${encodeURIComponent(
+//                       p.name
+//                     )}&body=${encodeURIComponent(
+//                       `Hello ${COMPANY.name},\n\nI am interested in this product:\n\nName: ${p.name}\nPrice: AED ${p.price}\n\n<img src="${window.location.origin}${p.img}" alt="${p.name}" style="width:300px;"/>`
+//                     )}`}
+//                     className="inline-block w-full text-center bg-blue-600 text-white rounded-md py-2 text-sm"
+//                   >
+//                     Inquire via Email
+//                   </a>
+
+//                   <button
+//                     onClick={() => handleAddToCart(p)}
+//                     className="inline-block w-full text-center bg-gray-600 text-white rounded-md py-2 text-sm"
+//                   >
+//                     Add to Cart
+//                   </button>
+//                 </div>
+//               </div>
+//             </motion.div>
+//           ))}
+//         </AnimatePresence>
+//       </motion.div>
+
+//       {filtered.length === 0 && (
+//         <p className="text-center text-slate-500 mt-20">No products found.</p>
+//       )}
+//     </section>
+//   );
+// }
+
 // ==============================
 // PRODUCT CATALOG
 // ==============================
@@ -648,9 +856,7 @@ function ProductCatalog({ orderItems, setOrderItems }) {
 
   const filtered = useMemo(() => {
     let list = PRODUCTS.filter(
-      (p) =>
-        (category === "All" || p.category === category) &&
-        p.name.toLowerCase().includes(search.toLowerCase())
+      (p) => (category === "All" || p.category === category) && p.name.toLowerCase().includes(search.toLowerCase())
     );
     if (sort === "low") list = [...list].sort((a, b) => a.price - b.price);
     if (sort === "high") list = [...list].sort((a, b) => b.price - a.price);
@@ -672,7 +878,7 @@ function ProductCatalog({ orderItems, setOrderItems }) {
 
     const existing = orderItems.find((item) => item.id === product.id);
     if (existing) {
-      setOrderItems(orderItems.map((item) => item.id === product.id ? { ...item, quantity: item.quantity + qty, price } : item));
+      setOrderItems(orderItems.map((item) => (item.id === product.id ? { ...item, quantity: item.quantity + qty, price } : item)));
     } else {
       setOrderItems([...orderItems, { ...product, quantity: qty, price }]);
     }
@@ -690,11 +896,7 @@ function ProductCatalog({ orderItems, setOrderItems }) {
             <button
               key={c}
               onClick={() => setCategory(c)}
-              className={`px-4 py-2 rounded-full border transition ${
-                c === category
-                  ? "bg-green-600 text-white border-green-600"
-                  : "border-slate-300 hover:bg-slate-100"
-              }`}
+              className={`px-4 py-2 rounded-full border transition ${c === category ? "bg-green-600 text-white border-green-600" : "border-slate-300 hover:bg-slate-100"}`}
             >
               {c}
             </button>
@@ -711,11 +913,7 @@ function ProductCatalog({ orderItems, setOrderItems }) {
               className="p-2 outline-none text-sm"
             />
           </div>
-          <select
-            className="border rounded-md p-2 text-sm"
-            value={sort}
-            onChange={(e) => setSort(e.target.value)}
-          >
+          <select className="border rounded-md p-2 text-sm" value={sort} onChange={(e) => setSort(e.target.value)}>
             <option value="">Sort by</option>
             <option value="low">Price: Low → High</option>
             <option value="high">Price: High → Low</option>
@@ -738,98 +936,46 @@ function ProductCatalog({ orderItems, setOrderItems }) {
                 <img src={p.img} alt={p.name} className="h-44 w-full object-cover cursor-zoom-in" />
               </Zoom>
 
-              {/* Multiple images */}
               {p.images && p.images.length > 0 && (
-                <div className="flex gap-2 mt-2 overflow-x-auto px-2">
-                  {p.images.map((img, idx) => (
-                    <Zoom key={idx}>
-                      <img src={img} alt={`${p.name}-${idx}`} className="h-20 w-20 object-cover rounded cursor-zoom-in" />
-                    </Zoom>
+                <div className="flex overflow-x-auto gap-1 p-1">
+                  {p.images.map((img, i) => (
+                    <img key={i} src={img} alt="" className="h-16 w-16 object-cover rounded cursor-pointer" />
                   ))}
                 </div>
               )}
 
-              <div className="p-4">
-                <h3 className="font-semibold text-lg">{p.name}</h3>
-                <p className="text-sm text-slate-500 mt-1">{p.category}</p>
-                <p className="text-green-600 font-bold mt-2">AED {p.price}</p>
-
-                {/* Bulk pricing display */}
-                {p.bulkPricing && (
-                  <div className="text-sm text-slate-600 mt-2">
-                    <strong>Bulk Pricing:</strong>
-                    <ul>
-                      {p.bulkPricing.map((tier, idx) => (
-                        <li key={idx}>
-                          {tier.min} - {tier.max}: AED {tier.price}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-
-                {/* Technical specs */}
+              <div className="p-4 flex flex-col gap-2">
+                <div className="font-semibold">{p.name}</div>
+                <div className="text-green-600 font-bold">AED {p.price}</div>
                 {p.specs && (
-                  <div className="text-sm text-slate-600 mt-2">
-                    <button
-                      onClick={() => setSpecOpen({ ...specOpen, [p.id]: !specOpen[p.id] })}
-                      className="underline text-blue-600 text-sm"
-                    >
-                      {specOpen[p.id] ? "Hide Specs" : "Show Specs"}
-                    </button>
-                    {specOpen[p.id] && (
-                      <ul className="mt-1 space-y-1">
-                        {Object.entries(p.specs).map(([key, val]) => (
-                          <li key={key}><strong>{key}:</strong> {val}</li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-                )}
-
-                <div className="mt-4 flex flex-col gap-2">
-                  {/* WhatsApp Inquire */}
-                 <a
-  href={`https://wa.me/${COMPANY.whatsapp}?text=${encodeURIComponent(
-    `Hello ${COMPANY.name},\nI am interested in this product:\n\nName: ${p.name}\nPrice: AED ${p.price}\nImage: ${typeof window !== "undefined" ? window.location.origin : ""}${p.img}`
-  )}`}
-  target="_blank"
-  className="inline-block w-full text-center bg-green-600 text-white rounded-md py-2 text-sm"
->
-  Inquire on WhatsApp
-</a>
-
-                  {/* Email Inquire */}
-                  <a
-                    href={`mailto:${COMPANY.email}?subject=Inquiry about ${encodeURIComponent(
-                      p.name
-                    )}&body=${encodeURIComponent(
-                      `Hello ${COMPANY.name},\n\nI am interested in this product:\n\nName: ${p.name}\nPrice: AED ${p.price}\n\n<img src="${window.location.origin}${p.img}" alt="${p.name}" style="width:300px;"/>`
-                    )}`}
-                    className="inline-block w-full text-center bg-blue-600 text-white rounded-md py-2 text-sm"
-                  >
-                    Inquire via Email
-                  </a>
-
                   <button
-                    onClick={() => handleAddToCart(p)}
-                    className="inline-block w-full text-center bg-gray-600 text-white rounded-md py-2 text-sm"
+                    onClick={() => setSpecOpen({ ...specOpen, [p.id]: !specOpen[p.id] })}
+                    className="text-sm text-blue-600 underline"
                   >
-                    Add to Cart
+                    {specOpen[p.id] ? "Hide Specs" : "Show Specs"}
                   </button>
-                </div>
+                )}
+                {specOpen[p.id] && (
+                  <ul className="text-xs mt-1 space-y-1">
+                    {Object.entries(p.specs).map(([k, v]) => (
+                      <li key={k}>
+                        <strong>{k}:</strong> {v}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                <button onClick={() => handleAddToCart(p)} className="mt-2 bg-green-600 text-white py-2 rounded-md">
+                  Add to Cart
+                </button>
               </div>
             </motion.div>
           ))}
         </AnimatePresence>
       </motion.div>
-
-      {filtered.length === 0 && (
-        <p className="text-center text-slate-500 mt-20">No products found.</p>
-      )}
     </section>
   );
 }
+
 
 // ==============================
 // ORDER / INVOICE
