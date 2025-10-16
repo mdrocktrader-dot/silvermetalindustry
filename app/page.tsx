@@ -26,6 +26,177 @@ import {
 } from "react-icons/fa";
 
 
+interface NavLink {
+  name: string;
+  href: string;
+}
+
+interface SocialLink {
+  name: string;
+  url: string;
+  icon: React.ReactNode;
+}
+
+interface NavbarProps {
+  orderCount: number;
+}
+
+export function Nav({ orderCount }: NavbarProps) {
+  const [language, setLanguage] = useState("EN");
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  const toggleMobileMenu = () => setMobileOpen(!mobileOpen);
+  const toggleLanguage = () => setLanguage(language === "EN" ? "AR" : "EN");
+
+  const scrollToOrder = () => {
+    const orderSection = document.getElementById("order");
+    if (orderSection) {
+      orderSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const navLinks: NavLink[] = [
+    { name: "Home", href: "#" },
+    { name: "Products", href: "#products" },
+    { name: "About Us", href: "#about" },
+    { name: "Services", href: "#services" },
+    { name: "Contact", href: "#contact" },
+  ];
+
+  const socialLinks: SocialLink[] = [
+    { name: "Facebook", url: "https://facebook.com", icon: <span>📘</span> },
+    { name: "Instagram", url: "https://instagram.com", icon: <span>📸</span> },
+    { name: "LinkedIn", url: "https://linkedin.com", icon: <span>🔗</span> },
+    { name: "YouTube", url: "https://youtube.com", icon: <span>▶️</span> },
+  ];
+
+  return (
+    <header className="w-full sticky top-0 z-50 shadow-sm">
+      {/* Top Bar */}
+      <div className="bg-gray-900 text-white text-sm py-2 px-6 flex justify-between items-center">
+        <div className="flex gap-4">
+          {socialLinks.map((s, i) => (
+            <a
+              key={i}
+              href={s.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-green-500 transition-transform transform hover:scale-125"
+            >
+              {s.icon}
+            </a>
+          ))}
+        </div>
+        <button
+          onClick={toggleLanguage}
+          className="border border-white px-2 py-1 rounded hover:bg-white hover:text-gray-900 transition"
+        >
+          {language}
+        </button>
+      </div>
+
+      {/* Main Navbar */}
+      <div className="bg-white/90 backdrop-blur border-b">
+        <div className="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
+          {/* Logo */}
+          <a href="#" className="flex items-center gap-3">
+            <img
+              src="/logo.png"
+              alt="Logo"
+              className="w-12 h-12 rounded-md object-contain"
+            />
+            <div>
+              <div className="font-bold text-lg text-slate-900">Company Name</div>
+              <div className="text-xs text-slate-600">Sharjah, UAE</div>
+            </div>
+          </a>
+
+          {/* Desktop Links */}
+          <nav className="hidden md:flex items-center gap-6 text-sm">
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                className="hover:text-green-600 transition relative group"
+              >
+                <span className="group-hover:underline">{link.name}</span>
+              </a>
+            ))}
+
+            <button onClick={scrollToOrder} className="relative">
+              <ShoppingCart size={20} />
+              {orderCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                  {orderCount}
+                </span>
+              )}
+            </button>
+
+            <a
+              href="https://wa.me/971501234567"
+              target="_blank"
+              rel="noreferrer"
+              className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition"
+            >
+              WhatsApp
+            </a>
+          </nav>
+
+          {/* Mobile Menu Button */}
+          <div className="flex md:hidden items-center gap-3">
+            <button onClick={scrollToOrder} className="relative">
+              <ShoppingCart size={20} />
+              {orderCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                  {orderCount}
+                </span>
+              )}
+            </button>
+            <button
+              className="border rounded-md p-2"
+              onClick={toggleMobileMenu}
+            >
+              {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Menu */}
+        {mobileOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="md:hidden bg-white shadow-md overflow-hidden"
+          >
+            <div className="flex flex-col gap-4 px-6 py-4">
+              {navLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className="hover:text-green-600 transition"
+                  onClick={toggleMobileMenu}
+                >
+                  {link.name}
+                </a>
+              ))}
+              <a
+                href="https://wa.me/971501234567"
+                target="_blank"
+                rel="noreferrer"
+                className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition"
+              >
+                WhatsApp
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </div>
+    </header>
+  );
+}
+
+
 
 // ==============================
 // COMPANY DATA
