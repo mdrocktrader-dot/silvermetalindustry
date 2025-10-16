@@ -982,7 +982,7 @@ function ProductCatalog({ orderItems, setOrderItems }) {
                     onClick={() => handleInquireWhatsApp(p)}
                     className="flex-1 bg-blue-600 text-white py-2 rounded-md"
                   >
-                    Inquire
+                  WhatsApp
                   </button>
                 </div>
               </div>
