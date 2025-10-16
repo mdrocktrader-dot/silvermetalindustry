@@ -1157,24 +1157,10 @@ function Contact() {
           <p className="flex items-center gap-2">
             <span className="font-semibold">Location:</span> {COMPANY.location}
           </p>
-          {/* Optional social links */}
-          <div className="flex gap-4 mt-4">
-            <a href={COMPANY.facebook} target="_blank" rel="noopener noreferrer" className="hover:text-blue-600 transition">
-              <i className="fab fa-facebook-f"></i>
-            </a>
-            <a href={COMPANY.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-pink-500 transition">
-              <i className="fab fa-instagram"></i>
-            </a>
-            <a href={COMPANY.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-blue-700 transition">
-              <i className="fab fa-linkedin-in"></i>
-            </a>
-            <a href={COMPANY.youtube} target="_blank" rel="noopener noreferrer" className="hover:text-red-600 transition">
-              <i className="fab fa-youtube"></i>
-            </a>
-          </div>
         </div>
 
-        {/* Contact Form */}
+        {/* Contact Form */}    
+        
         <motion.form
           className="bg-white shadow-xl rounded-xl p-8 flex flex-col gap-4"
           initial={{ opacity: 0, x: 50 }}
