@@ -885,6 +885,11 @@ function ProductCatalog({ orderItems, setOrderItems }) {
     alert(`${product.name} added to cart`);
   };
 
+  const handleInquireWhatsApp = (product) => {
+    const message = `Hello, I want to inquire about ${product.name}.`;
+    window.open(`https://wa.me/${COMPANY.whatsapp}?text=${encodeURIComponent(message)}`, "_blank");
+  };
+
   return (
     <section id="products" className="max-w-7xl mx-auto px-6 py-20">
       <h2 className="text-3xl font-bold text-center mb-10">Our Products</h2>
@@ -964,9 +969,22 @@ function ProductCatalog({ orderItems, setOrderItems }) {
                     ))}
                   </ul>
                 )}
-                <button onClick={() => handleAddToCart(p)} className="mt-2 bg-green-600 text-white py-2 rounded-md">
-                  Add to Cart
-                </button>
+
+                {/* Buttons */}
+                <div className="mt-2 flex gap-2">
+                  <button
+                    onClick={() => handleAddToCart(p)}
+                    className="flex-1 bg-green-600 text-white py-2 rounded-md"
+                  >
+                    Add to Cart
+                  </button>
+                  <button
+                    onClick={() => handleInquireWhatsApp(p)}
+                    className="flex-1 bg-blue-600 text-white py-2 rounded-md"
+                  >
+                    Inquire
+                  </button>
+                </div>
               </div>
             </motion.div>
           ))}
@@ -975,7 +993,6 @@ function ProductCatalog({ orderItems, setOrderItems }) {
     </section>
   );
 }
-
 
 // ==============================
 // ORDER / INVOICE
