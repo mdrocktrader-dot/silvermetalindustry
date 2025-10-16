@@ -11,15 +11,22 @@ import Zoom from "react-medium-image-zoom";
 import 'react-medium-image-zoom/dist/styles.css';
 
 // ==============================
-// COMPANY INFO
+// COMPANY DATA
 // ==============================
-const COMPANY = {
-  name: "Silver Metal Industry LLC",
+export const COMPANY = {
+  name: "Silver Metal Industry",
   location: "Sharjah, UAE",
-  whatsapp: "971526551620",
-  email: "mdrocktrader@gmail.com",
-  tagline: "Supplier of Aluminium, Mild Steel, Roofing & Building Materials in UAE.",
+  whatsapp: "+971500000000",
+  email: "info@silvermetal.com",
+  tagline: "High-quality building materials",
   vatPercentage: 5,
+
+  // Social Links
+  facebook: "https://www.facebook.com/silvermetal",
+  instagram: "https://www.instagram.com/silvermetal",
+  linkedin: "https://www.linkedin.com/company/silvermetal",
+  youtube: "https://www.youtube.com/@silvermetal",
+  twitter: "https://twitter.com/silvermetal", // optional
 };
 
 // ==============================
@@ -32,8 +39,8 @@ const PRODUCTS = [
     category: "Aluminium",
     name: "Angle Aluminium",
     price: 120,
-    img: "/products/aluminium-angle.jpg",
-    images: ["/products/aluminium-angle.jpg", "/products/aluminium-angle2.jpg"],
+    img: "/mild-steel-001.jpeg",
+    images: ["/mild-steel-001.jpeg", "/mild-steel-001.jpeg"],
     specs: { Dimensions: "50x50mm", Thickness: "2mm", Certification: "ISO 9001" },
     bulkPricing: [
       { min: 1, max: 10, price: 120 },
@@ -60,8 +67,8 @@ const PRODUCTS = [
     category: "Aluminium",
     name: "Mill Finish Aluminium Coil/Sheet",
     price: 210,
-    img: "/products/millfinish.jpg",
-    images: ["/products/millfinish.jpg", "/products/millfinish2.jpg"],
+    img: "aluminium-001.jpg",
+    images: ["aluminium-001.jpg", "aluminium-001.jpg"],
     specs: { Width: "1000mm", Thickness: "0.6mm", Finish: "Mill" },
     bulkPricing: [
       { min: 1, max: 10, price: 210 },
@@ -246,8 +253,8 @@ const PRODUCTS = [
     category: "Building",
     name: "Galvanized U Channel",
     price: 110,
-    img: "/products/u-channel.jpg",
-    images: ["/products/u-channel.jpg", "/products/u-channel2.jpg"],
+    img: "aluminium-001.jpg",
+    images: ["aluminium-001.jpg", "aluminium-001.jpg"],
     specs: { Length: "3m", Width: "50mm", Material: "Galvanized Steel" },
     bulkPricing: [
       { min: 1, max: 10, price: 110 },
@@ -1115,102 +1122,6 @@ function OrderInvoice({ orderItems, setOrderItems, orderRef }) {
   );
 }
 
-// ==============================
-// CONTACT
-// ==============================
-
-
-function Contact() {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    // Optional: Here you can also integrate API, email service, etc.
-    alert("Thank you! Your message has been sent.");
-
-    // Reset form safely
-    (e.target as HTMLFormElement).reset();
-  };
-
-  return (
-    <section id="contact" className="max-w-6xl mx-auto px-6 py-20">
-      <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-        Contact Us
-      </h2>
-
-      <div className="grid md:grid-cols-2 gap-12">
-        {/* Contact Info */}
-        <div className="flex flex-col justify-center gap-4 text-slate-700">
-          <p className="flex items-center gap-2">
-            <span className="font-semibold">Email:</span> {COMPANY.email}
-          </p>
-          <p className="flex items-center gap-2">
-            <span className="font-semibold">WhatsApp:</span>{" "}
-            <a
-              href={`https://wa.me/${COMPANY.whatsapp.replace(/[^0-9]/g, "")}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-green-600 hover:underline"
-            >
-              {COMPANY.whatsapp}
-            </a>
-          </p>
-          <p className="flex items-center gap-2">
-            <span className="font-semibold">Location:</span> {COMPANY.location}
-          </p>
-        </div>
-
-        {/* Contact Form */}    
-        
-        <motion.form
-          className="bg-white shadow-xl rounded-xl p-8 flex flex-col gap-4"
-          initial={{ opacity: 0, x: 50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
-          onSubmit={handleSubmit}
-        >
-          <input
-            type="text"
-            placeholder="Your Name"
-            className="border border-gray-300 rounded-md p-3 outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 transition"
-            required
-          />
-          <input
-            type="email"
-            placeholder="Your Email"
-            className="border border-gray-300 rounded-md p-3 outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 transition"
-            required
-          />
-          <textarea
-            placeholder="Your Message"
-            className="border border-gray-300 rounded-md p-3 outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 transition resize-none h-32"
-            required
-          ></textarea>
-          <motion.button
-            type="submit"
-            className="bg-green-600 text-white py-3 rounded-md mt-2 hover:bg-green-700 shadow-md transition transform hover:scale-105"
-            whileHover={{ scale: 1.05 }}
-          >
-            Send Message
-          </motion.button>
-        </motion.form>
-      </div>
-
-      {/* Optional: Map Section */}
-      <div className="mt-16 md:mt-24 max-w-6xl mx-auto px-6 h-64 md:h-96 rounded-xl overflow-hidden shadow-md">
-        <iframe
-          title="Company Location"
-          src={`https://www.google.com/maps?q=${encodeURIComponent(
-            COMPANY.location
-          )}&output=embed`}
-          className="w-full h-full border-0 rounded-xl"
-          allowFullScreen
-          loading="lazy"
-        ></iframe>
-      </div>
-    </section>
-  );
-}
-
 
 // ==============================
 // PROFESSIONAL FOOTER WITH AVATAR & FULL ANIMATION
@@ -1327,6 +1238,182 @@ function Footer() {
   );
 }
 
+
+// ==============================
+// CONTACT
+// ==============================
+
+function Contact() {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    // Optional: integrate with email API here
+    alert("Thank you! Your message has been sent.");
+
+    // Reset form safely
+    (e.target as HTMLFormElement).reset();
+  };
+
+  return (
+    <section id="contact" className="max-w-6xl mx-auto px-6 py-20">
+      <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+        Contact Us
+      </h2>
+
+      <div className="grid md:grid-cols-2 gap-12">
+        {/* Contact Info */}
+        <motion.div
+          className="flex flex-col justify-center gap-4 text-slate-700"
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <p className="flex items-center gap-2">
+            <span className="font-semibold">Email:</span>
+            <a
+              href={`mailto:${COMPANY.email}`}
+              className="text-green-600 hover:underline transition"
+            >
+              {COMPANY.email}
+            </a>
+          </p>
+
+          <p className="flex items-center gap-2">
+            <span className="font-semibold">WhatsApp:</span>
+            <a
+              href={`https://wa.me/${COMPANY.whatsapp.replace(/[^0-9]/g, "")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-green-600 hover:underline transition"
+            >
+              {COMPANY.whatsapp}
+            </a>
+          </p>
+
+          <p className="flex items-center gap-2">
+            <span className="font-semibold">Location:</span> {COMPANY.location}
+          </p>
+
+          {/* Social Links */}
+          <div className="flex gap-4 mt-4">
+            {COMPANY.facebook && (
+              <a
+                href={COMPANY.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-blue-600 transition text-xl"
+              >
+                <i className="fab fa-facebook-f"></i>
+              </a>
+            )}
+            {COMPANY.instagram && (
+              <a
+                href={COMPANY.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-pink-500 transition text-xl"
+              >
+                <i className="fab fa-instagram"></i>
+              </a>
+            )}
+            {COMPANY.linkedin && (
+              <a
+                href={COMPANY.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-blue-700 transition text-xl"
+              >
+                <i className="fab fa-linkedin-in"></i>
+              </a>
+            )}
+            {COMPANY.youtube && (
+              <a
+                href={COMPANY.youtube}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-red-600 transition text-xl"
+              >
+                <i className="fab fa-youtube"></i>
+              </a>
+            )}
+          </div>
+
+          {/* Quick Action Buttons */}
+          <div className="flex gap-4 mt-6">
+            <motion.a
+              href={`mailto:${COMPANY.email}`}
+              className="bg-green-600 text-white px-4 py-2 rounded-md shadow hover:bg-green-700 transition"
+              whileHover={{ scale: 1.05 }}
+            >
+              Send Email
+            </motion.a>
+            <motion.a
+              href={`https://wa.me/${COMPANY.whatsapp.replace(/[^0-9]/g, "")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-green-500 text-white px-4 py-2 rounded-md shadow hover:bg-green-600 transition"
+              whileHover={{ scale: 1.05 }}
+            >
+              WhatsApp Message
+            </motion.a>
+          </div>
+        </motion.div>
+
+        {/* Contact Form */}
+        <motion.form
+          className="bg-white shadow-xl rounded-xl p-8 flex flex-col gap-4"
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+          onSubmit={handleSubmit}
+        >
+          <input
+            type="text"
+            placeholder="Your Name"
+            className="border border-gray-300 rounded-md p-3 outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 transition"
+            required
+          />
+          <input
+            type="email"
+            placeholder="Your Email"
+            className="border border-gray-300 rounded-md p-3 outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 transition"
+            required
+          />
+          <textarea
+            placeholder="Your Message"
+            className="border border-gray-300 rounded-md p-3 outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 transition resize-none h-32"
+            required
+          ></textarea>
+          <motion.button
+            type="submit"
+            className="bg-green-600 text-white py-3 rounded-md mt-2 hover:bg-green-700 shadow-md transition transform hover:scale-105"
+            whileHover={{ scale: 1.05 }}
+          >
+            Send Message
+          </motion.button>
+        </motion.form>
+      </div>
+
+      {/* Map Section */}
+      <motion.div
+        className="mt-16 md:mt-24 max-w-6xl mx-auto px-6 h-64 md:h-96 rounded-xl overflow-hidden shadow-md"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+      >
+        <iframe
+          title="Company Location"
+          src={`https://www.google.com/maps?q=${encodeURIComponent(
+            COMPANY.location
+          )}&output=embed`}
+          className="w-full h-full border-0 rounded-xl"
+          allowFullScreen
+          loading="lazy"
+        ></iframe>
+      </motion.div>
+    </section>
+  );
+}
 
 
 
