@@ -804,15 +804,15 @@ function ProductCatalog({ orderItems, setOrderItems }) {
 
                 <div className="mt-4 flex flex-col gap-2">
                   {/* WhatsApp Inquire */}
-                  <a
-                    href={`https://wa.me/${COMPANY.whatsapp}?text=${encodeURIComponent(
-                      `Hello ${COMPANY.name},\nI am interested in this product:\n\nName: ${p.name}\nPrice: AED ${p.price}\nImage: ${window.location.origin}${p.img}`
-                    )}`}
-                    target="_blank"
-                    className="inline-block w-full text-center bg-green-600 text-white rounded-md py-2 text-sm"
-                  >
-                    Inquire on WhatsApp
-                  </a>
+                 <a
+  href={`https://wa.me/${COMPANY.whatsapp}?text=${encodeURIComponent(
+    `Hello ${COMPANY.name},\nI am interested in this product:\n\nName: ${p.name}\nPrice: AED ${p.price}\nImage: ${typeof window !== "undefined" ? window.location.origin : ""}${p.img}`
+  )}`}
+  target="_blank"
+  className="inline-block w-full text-center bg-green-600 text-white rounded-md py-2 text-sm"
+>
+  Inquire on WhatsApp
+</a>
 
                   {/* Email Inquire */}
                   <a
