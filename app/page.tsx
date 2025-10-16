@@ -2,13 +2,30 @@
 
 import React, { useState, useMemo, useRef } from "react";
 import Head from "next/head";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import { Menu, X, Search, ShoppingCart } from "lucide-react";
 import { saveAs } from "file-saver";
 import { Document, Packer, Paragraph, TextRun } from "docx";
 import { jsPDF } from "jspdf";
 import Zoom from "react-medium-image-zoom";
 import 'react-medium-image-zoom/dist/styles.css';
+// import { FaFacebookF, FaInstagram, FaLinkedinIn, FaYoutube, FaWhatsapp } from "react-icons/fa";
+// At the very top of your file
+import { motion } from "framer-motion";
+import { 
+  FaFacebookF, 
+  FaInstagram, 
+  FaLinkedinIn, 
+  FaYoutube, 
+  FaWhatsapp, 
+  FaPhone, 
+  FaEnvelope, 
+  FaHome, 
+  FaInfoCircle, 
+  FaBoxOpen 
+} from "react-icons/fa";
+
+
 
 // ==============================
 // COMPANY DATA
@@ -1123,120 +1140,7 @@ function OrderInvoice({ orderItems, setOrderItems, orderRef }) {
 }
 
 
-// ==============================
-// PROFESSIONAL FOOTER WITH AVATAR & FULL ANIMATION
-// ==============================
 
-
-function Footer() {
-  const socialLinks = [
-    { name: "Facebook", icon: "📘", url: "https://facebook.com" },
-    { name: "Instagram", icon: "📸", url: "https://instagram.com" },
-    { name: "LinkedIn", icon: "🔗", url: "https://linkedin.com" },
-    { name: "YouTube", icon: "▶️", url: "https://youtube.com" },
-    { name: "TikTok", icon: "🎵", url: "https://tiktok.com" },
-    { name: "WhatsApp", icon: "💬", url: `https://wa.me/971501234567` },
-  ];
-
-  const quickLinks = [
-    { name: "Home", href: "#" },
-    { name: "Products", href: "#products" },
-    { name: "About Us", href: "#about" },
-    { name: "Services", href: "#services" },
-    { name: "Contact", href: "#contact" },
-  ];
-
-  return (
-    <footer className="bg-gradient-to-t from-slate-900 to-slate-800 text-white relative">
-      <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-3 gap-12">
-
-        {/* Company Info & Avatar */}
-        <motion.div
-          className="flex flex-col items-center md:items-start gap-4"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <img
-            src="/avatar.jpg" // replace with your picture/logo
-            alt="Company Avatar"
-            className="w-24 h-24 rounded-full border-2 border-green-500 object-cover"
-          />
-          <h2 className="text-3xl font-bold">{COMPANY.name}</h2>
-          <p className="text-gray-400 text-center md:text-left mt-1">
-            Delivering high-quality, durable, and efficient building materials across UAE.
-          </p>
-        </motion.div>
-
-        {/* Quick Links */}
-        <motion.div
-          className="flex flex-col items-center md:items-start gap-3"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-        >
-          <h3 className="text-lg font-semibold mb-3">Quick Links</h3>
-          <div className="flex flex-wrap justify-center md:justify-start gap-4">
-            {quickLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="text-gray-400 hover:text-green-500 transition-colors"
-              >
-                {link.name}
-              </a>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Contact Info & Social */}
-        <motion.div
-          className="flex flex-col items-center md:items-start gap-4"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <h3 className="text-lg font-semibold mb-3">Contact Us</h3>
-          <p className="text-gray-400 text-sm flex items-center gap-2">📞 +971 50 123 4567</p>
-          <p className="text-gray-400 text-sm flex items-center gap-2">✉️ info@silvermetal.ae</p>
-          <p className="text-gray-400 text-sm flex items-center gap-2">📍 Sharjah, UAE</p>
-
-          <div className="flex gap-4 mt-2 text-2xl">
-            {socialLinks.map((s) => (
-              <motion.a
-                key={s.name}
-                href={s.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.2, rotate: 10 }}
-                className="text-gray-400 hover:text-green-500 transition-colors"
-                title={s.name}
-              >
-                {s.icon}
-              </motion.a>
-            ))}
-          </div>
-        </motion.div>
-      </div>
-
-      {/* Bottom Bar */}
-      <div className="bg-slate-900 text-gray-500 text-sm text-center py-4 border-t border-gray-700">
-        &copy; {new Date().getFullYear()} {COMPANY.name}. All rights reserved.
-      </div>
-
-      {/* Floating WhatsApp Button */}
-      <motion.a
-        href="https://wa.me/971501234567"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed bottom-5 right-5 bg-green-500 text-white p-4 rounded-full shadow-lg hover:scale-110 hover:rotate-6 transition-transform z-50"
-        whileHover={{ scale: 1.2, rotate: 10 }}
-      >
-        💬
-      </motion.a>
-    </footer>
-  );
-}
 
 
 // ==============================
@@ -1414,6 +1318,115 @@ function Contact() {
     </section>
   );
 }
+
+// ==============================
+// FOOTER
+// ==============================
+
+
+export function Footer() {
+  const socialLinks = [
+    { name: "Facebook", icon: <FaFacebookF />, url: COMPANY.facebook },
+    { name: "Instagram", icon: <FaInstagram />, url: COMPANY.instagram },
+    { name: "LinkedIn", icon: <FaLinkedinIn />, url: COMPANY.linkedin },
+    { name: "YouTube", icon: <FaYoutube />, url: COMPANY.youtube },
+    { name: "WhatsApp", icon: <FaWhatsapp />, url: `https://wa.me/${COMPANY.whatsapp.replace(/[^0-9]/g, "")}` },
+  ];
+
+  const quickLinks = [
+    { name: "Home", href: "#", icon: <FaHome /> },
+    { name: "About Us", href: "#about", icon: <FaInfoCircle /> },
+    { name: "Products", href: "#products", icon: <FaBoxOpen /> },
+    { name: "Services", href: "#services", icon: <FaBoxOpen /> },
+    { name: "Contact", href: "#contact", icon: <FaEnvelope /> },
+  ];
+
+  return (
+    <footer className="bg-slate-900 text-white relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-12">
+
+        {/* Company Info */}
+        <motion.div
+          className="flex flex-col items-center md:items-start gap-4"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2 className="text-2xl md:text-3xl font-bold text-center md:text-left">{COMPANY.name}</h2>
+          <p className="text-gray-400 text-center md:text-left">
+            Trusted provider of high-quality building materials with years of experience and loyalty to our clients.
+          </p>
+          <p className="flex items-center gap-2 text-gray-400 mt-2"><FaPhone /> {COMPANY.whatsapp}</p>
+          <p className="flex items-center gap-2 text-gray-400"><FaEnvelope /> {COMPANY.email}</p>
+          <p className="flex items-center gap-2 text-gray-400"><FaHome /> {COMPANY.location}</p>
+        </motion.div>
+
+        {/* Quick Links */}
+        <motion.div
+          className="flex flex-col items-center md:items-start gap-4"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+        >
+          <h3 className="text-lg font-semibold mb-2">Quick Links</h3>
+          <div className="flex flex-wrap justify-center md:justify-start gap-6">
+            {quickLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                className="flex items-center gap-1 text-gray-400 hover:text-green-500 transition-colors"
+              >
+                {link.icon} <span className="text-sm">{link.name}</span>
+              </a>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Social Links */}
+        <motion.div
+          className="flex flex-col items-center md:items-start gap-4"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <h3 className="text-lg font-semibold mb-2">Follow Us</h3>
+          <div className="flex gap-4 text-2xl">
+            {socialLinks.map((s) => (
+              <motion.a
+                key={s.name}
+                href={s.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.2, rotate: 10 }}
+                className="text-gray-400 hover:text-green-500 transition-colors"
+                title={s.name}
+              >
+                {s.icon}
+              </motion.a>
+            ))}
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Bottom Bar */}
+      <div className="bg-slate-800 text-gray-500 text-sm text-center py-4 border-t border-gray-700">
+        &copy; {new Date().getFullYear()} {COMPANY.name}. All rights reserved.
+      </div>
+
+      {/* Floating WhatsApp Button */}
+      <motion.a
+        href={`https://wa.me/${COMPANY.whatsapp.replace(/[^0-9]/g, "")}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-5 right-5 bg-green-500 text-white p-4 rounded-full shadow-lg hover:scale-110 hover:rotate-6 transition-transform z-50"
+        whileHover={{ scale: 1.2, rotate: 10 }}
+      >
+        <FaWhatsapp size={24} />
+      </motion.a>
+    </footer>
+  );
+}
+
 
 
 
