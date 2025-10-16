@@ -1118,29 +1118,235 @@ function OrderInvoice({ orderItems, setOrderItems, orderRef }) {
 // ==============================
 // CONTACT
 // ==============================
+
+
 function Contact() {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    // Optional: Here you can also integrate API, email service, etc.
+    alert("Thank you! Your message has been sent.");
+
+    // Reset form safely
+    (e.target as HTMLFormElement).reset();
+  };
+
   return (
-    <section id="contact" className="max-w-5xl mx-auto px-6 py-20">
-      <h2 className="text-3xl font-bold text-center mb-10">Contact Us</h2>
-      <div className="text-center text-slate-700">
-        <p>Email: {COMPANY.email}</p>
-        <p>WhatsApp: {COMPANY.whatsapp}</p>
-        <p>Location: {COMPANY.location}</p>
+    <section id="contact" className="max-w-6xl mx-auto px-6 py-20">
+      <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+        Contact Us
+      </h2>
+
+      <div className="grid md:grid-cols-2 gap-12">
+        {/* Contact Info */}
+        <div className="flex flex-col justify-center gap-4 text-slate-700">
+          <p className="flex items-center gap-2">
+            <span className="font-semibold">Email:</span> {COMPANY.email}
+          </p>
+          <p className="flex items-center gap-2">
+            <span className="font-semibold">WhatsApp:</span>{" "}
+            <a
+              href={`https://wa.me/${COMPANY.whatsapp.replace(/[^0-9]/g, "")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-green-600 hover:underline"
+            >
+              {COMPANY.whatsapp}
+            </a>
+          </p>
+          <p className="flex items-center gap-2">
+            <span className="font-semibold">Location:</span> {COMPANY.location}
+          </p>
+          {/* Optional social links */}
+          <div className="flex gap-4 mt-4">
+            <a href={COMPANY.facebook} target="_blank" rel="noopener noreferrer" className="hover:text-blue-600 transition">
+              <i className="fab fa-facebook-f"></i>
+            </a>
+            <a href={COMPANY.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-pink-500 transition">
+              <i className="fab fa-instagram"></i>
+            </a>
+            <a href={COMPANY.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-blue-700 transition">
+              <i className="fab fa-linkedin-in"></i>
+            </a>
+            <a href={COMPANY.youtube} target="_blank" rel="noopener noreferrer" className="hover:text-red-600 transition">
+              <i className="fab fa-youtube"></i>
+            </a>
+          </div>
+        </div>
+
+        {/* Contact Form */}
+        <motion.form
+          className="bg-white shadow-xl rounded-xl p-8 flex flex-col gap-4"
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+          onSubmit={handleSubmit}
+        >
+          <input
+            type="text"
+            placeholder="Your Name"
+            className="border border-gray-300 rounded-md p-3 outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 transition"
+            required
+          />
+          <input
+            type="email"
+            placeholder="Your Email"
+            className="border border-gray-300 rounded-md p-3 outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 transition"
+            required
+          />
+          <textarea
+            placeholder="Your Message"
+            className="border border-gray-300 rounded-md p-3 outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 transition resize-none h-32"
+            required
+          ></textarea>
+          <motion.button
+            type="submit"
+            className="bg-green-600 text-white py-3 rounded-md mt-2 hover:bg-green-700 shadow-md transition transform hover:scale-105"
+            whileHover={{ scale: 1.05 }}
+          >
+            Send Message
+          </motion.button>
+        </motion.form>
+      </div>
+
+      {/* Optional: Map Section */}
+      <div className="mt-16 md:mt-24 max-w-6xl mx-auto px-6 h-64 md:h-96 rounded-xl overflow-hidden shadow-md">
+        <iframe
+          title="Company Location"
+          src={`https://www.google.com/maps?q=${encodeURIComponent(
+            COMPANY.location
+          )}&output=embed`}
+          className="w-full h-full border-0 rounded-xl"
+          allowFullScreen
+          loading="lazy"
+        ></iframe>
       </div>
     </section>
   );
 }
 
+
 // ==============================
-// FOOTER
+// PROFESSIONAL FOOTER WITH AVATAR & FULL ANIMATION
 // ==============================
+
+
 function Footer() {
+  const socialLinks = [
+    { name: "Facebook", icon: "📘", url: "https://facebook.com" },
+    { name: "Instagram", icon: "📸", url: "https://instagram.com" },
+    { name: "LinkedIn", icon: "🔗", url: "https://linkedin.com" },
+    { name: "YouTube", icon: "▶️", url: "https://youtube.com" },
+    { name: "TikTok", icon: "🎵", url: "https://tiktok.com" },
+    { name: "WhatsApp", icon: "💬", url: `https://wa.me/971501234567` },
+  ];
+
+  const quickLinks = [
+    { name: "Home", href: "#" },
+    { name: "Products", href: "#products" },
+    { name: "About Us", href: "#about" },
+    { name: "Services", href: "#services" },
+    { name: "Contact", href: "#contact" },
+  ];
+
   return (
-    <footer className="bg-slate-900 text-white py-6 text-center">
-      <p>&copy; {new Date().getFullYear()} {COMPANY.name}. All rights reserved.</p>
+    <footer className="bg-gradient-to-t from-slate-900 to-slate-800 text-white relative">
+      <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-3 gap-12">
+
+        {/* Company Info & Avatar */}
+        <motion.div
+          className="flex flex-col items-center md:items-start gap-4"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <img
+            src="/avatar.jpg" // replace with your picture/logo
+            alt="Company Avatar"
+            className="w-24 h-24 rounded-full border-2 border-green-500 object-cover"
+          />
+          <h2 className="text-3xl font-bold">{COMPANY.name}</h2>
+          <p className="text-gray-400 text-center md:text-left mt-1">
+            Delivering high-quality, durable, and efficient building materials across UAE.
+          </p>
+        </motion.div>
+
+        {/* Quick Links */}
+        <motion.div
+          className="flex flex-col items-center md:items-start gap-3"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+        >
+          <h3 className="text-lg font-semibold mb-3">Quick Links</h3>
+          <div className="flex flex-wrap justify-center md:justify-start gap-4">
+            {quickLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                className="text-gray-400 hover:text-green-500 transition-colors"
+              >
+                {link.name}
+              </a>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Contact Info & Social */}
+        <motion.div
+          className="flex flex-col items-center md:items-start gap-4"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <h3 className="text-lg font-semibold mb-3">Contact Us</h3>
+          <p className="text-gray-400 text-sm flex items-center gap-2">📞 +971 50 123 4567</p>
+          <p className="text-gray-400 text-sm flex items-center gap-2">✉️ info@silvermetal.ae</p>
+          <p className="text-gray-400 text-sm flex items-center gap-2">📍 Sharjah, UAE</p>
+
+          <div className="flex gap-4 mt-2 text-2xl">
+            {socialLinks.map((s) => (
+              <motion.a
+                key={s.name}
+                href={s.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.2, rotate: 10 }}
+                className="text-gray-400 hover:text-green-500 transition-colors"
+                title={s.name}
+              >
+                {s.icon}
+              </motion.a>
+            ))}
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Bottom Bar */}
+      <div className="bg-slate-900 text-gray-500 text-sm text-center py-4 border-t border-gray-700">
+        &copy; {new Date().getFullYear()} {COMPANY.name}. All rights reserved.
+      </div>
+
+      {/* Floating WhatsApp Button */}
+      <motion.a
+        href="https://wa.me/971501234567"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-5 right-5 bg-green-500 text-white p-4 rounded-full shadow-lg hover:scale-110 hover:rotate-6 transition-transform z-50"
+        whileHover={{ scale: 1.2, rotate: 10 }}
+      >
+        💬
+      </motion.a>
     </footer>
   );
 }
+
+
+
+
+
+
+
 // ==============================
 // MAIN PAGE
 // ==============================
