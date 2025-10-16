@@ -673,7 +673,7 @@ function ProductCatalog({ orderItems, setOrderItems }) {
   }, [category, search, sort]);
 
   const handleAddToCart = (product) => {
-    const qty = parseInt(prompt(`Enter quantity for ${product.name}:`, 1));
+    const qty = parseInt(prompt(`Enter quantity for ${product.name}:`, "1"));
     if (!qty || qty < 1) return;
 
     let price = product.price;
@@ -850,7 +850,7 @@ function ProductCatalog({ orderItems, setOrderItems }) {
 // ORDER / INVOICE GENERATOR
 // ==============================
 function OrderInvoice({ orderItems, setOrderItems }) {
-  const orderRef = useRef();
+  const orderRef = useRef<HTMLDivElement>(null);
   const [clientInfo, setClientInfo] = useState({ name: "", phone: "", address: "" });
 
   const handleClientChange = (e) => setClientInfo({ ...clientInfo, [e.target.name]: e.target.value });
@@ -1001,24 +1001,32 @@ function Footer() {
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [orderItems, setOrderItems] = useState([]);
-  const orderRef = useRef();
-
+const orderRef = useRef<HTMLDivElement>(null);
   const scrollToOrder = () => {
     if (orderRef.current) orderRef.current.scrollIntoView({ behavior: "smooth" });
   };
 
-  return (
-    <>
-      <SeoHead />
-      <Navbar onOpenMenu={() => setMenuOpen(true)} orderCount={orderItems.length} scrollToOrder={scrollToOrder} />
-      <MobileMenu open={menuOpen} onClose={() => setMenuOpen(false)} />
-      <Hero />
-      <ProductCatalog orderItems={orderItems} setOrderItems={setOrderItems} />
-      <div ref={orderRef}>
-        <OrderInvoice orderItems={orderItems} setOrderItems={setOrderItems} />
-      </div>
-      <Contact />
-      <Footer />
-    </>
-  );
+ return (
+  <>
+    <SeoHead />
+    <Navbar 
+      onOpenMenu={() => setMenuOpen(true)} 
+      orderCount={orderItems.length} 
+      scrollToOrder={scrollToOrder} 
+    />
+    <MobileMenu 
+      open={menuOpen} 
+      onClose={() => setMenuOpen(false)} 
+      orderCount={orderItems.length} 
+      scrollToOrder={scrollToOrder} 
+    />
+    <Hero />
+    <ProductCatalog orderItems={orderItems} setOrderItems={setOrderItems} />
+    <div ref={orderRef}>
+      <OrderInvoice orderItems={orderItems} setOrderItems={setOrderItems} />
+    </div>
+    <Contact />
+    <Footer />
+  </>
+);
 }
