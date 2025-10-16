@@ -51,9 +51,20 @@ const PRODUCTS = [
   { id: "purlin", category: "Roof Cladding", name: "Metal Z & C Purlin", price: 310, img: "/products/purlin.jpg" },
   { id: "accessories", category: "Roof Cladding", name: "Roofing Accessories", price: 90, img: "/products/accessories.jpg" },
   { id: "translucent", category: "Roof Cladding", name: "Translucent Sheet", price: 200, img: "/products/translucent.jpg" },
+  // FENCING PRODUCTS
+{ id: "temporary-hoarding", category: "Fencing", name: "Temporary Hoarding Panels", price: 100, img: "/products/temporary-hoarding.jpg" },
+{ id: "high-security-fence", category: "Fencing", name: "High Security Chain Link Fence", price: 300, img: "/products/high-security-fence.jpg" },
+{ id: "chain-link-gate", category: "Fencing", name: "Chain Link Fence Gate", price: 200, img: "/products/chain-link-gate.jpg" },
+{ id: "chain-link-fence", category: "Fencing", name: "Chain Link Fence", price: 180, img: "/products/chain-link-fence.jpg" },
+{ id: "sand-barrier-fence", category: "Fencing", name: "Sand Barrier Fence", price: 150, img: "/products/sand-barrier-fence.jpg" },
+{ id: "fence-wires", category: "Fencing", name: "Fence Wires & Accessories", price: 90, img: "/products/fence-wires.jpg" },
+{ id: "playground-fence", category: "Fencing", name: "Playground Chain Link Fence", price: 220, img: "/products/playground-fence.jpg" },
+{ id: "wall-mounted-fence", category: "Fencing", name: "Wall Mounted Chain Link Fence", price: 250, img: "/products/wall-mounted-fence.jpg" },
+
 ];
 
-const CATEGORIES = ["All", "Aluminium", "Mild Steel", "Building", "Roof Cladding"];
+const CATEGORIES = ["All", "Aluminium", "Mild Steel", "Building", "Roof Cladding", "Fencing"];
+
 
 // ==============================
 // SEO
