@@ -3,7 +3,7 @@
 import React, { useState, useMemo, useRef } from "react";
 import Head from "next/head";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Phone, Search, ShoppingCart } from "lucide-react";
+import { Menu, X, Search, ShoppingCart } from "lucide-react";
 import { saveAs } from "file-saver";
 import { Document, Packer, Paragraph, TextRun } from "docx";
 import { jsPDF } from "jspdf";
@@ -529,6 +529,7 @@ const PRODUCTS = [
 
 ];
 const CATEGORIES = ["All", "Aluminium", "Mild Steel", "Building", "Roof Cladding", "Fencing"];
+
 // ==============================
 // SEO
 // ==============================
@@ -549,7 +550,6 @@ function Navbar({ onOpenMenu, orderCount, scrollToOrder }) {
   return (
     <header className="w-full bg-white/90 backdrop-blur sticky top-0 z-50 border-b">
       <div className="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
-        {/* Logo */}
         <a href="#" className="flex items-center gap-3">
           <img src="/logo.png" alt="Logo" className="w-12 h-12 rounded-md object-contain" />
           <div>
@@ -557,34 +557,24 @@ function Navbar({ onOpenMenu, orderCount, scrollToOrder }) {
             <div className="text-xs text-slate-600">{COMPANY.location}</div>
           </div>
         </a>
-
-        {/* Desktop menu */}
         <nav className="hidden md:flex items-center gap-6 text-sm">
           <a href="#products" className="hover:text-slate-900">Products</a>
           <a href="#order" className="hover:text-slate-900">Order</a>
-
-          {/* Cart icon */}
           <button onClick={scrollToOrder} className="relative">
             <ShoppingCart size={20} />
             {orderCount > 0 && (
               <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">{orderCount}</span>
             )}
           </button>
-
           <a href={`https://wa.me/${COMPANY.whatsapp}`} target="_blank" className="px-4 py-2 bg-green-600 text-white rounded-md">WhatsApp</a>
         </nav>
-
-        {/* Mobile buttons */}
         <div className="flex md:hidden items-center gap-3">
-          {/* Cart icon for mobile */}
           <button onClick={scrollToOrder} className="relative">
             <ShoppingCart size={20} />
             {orderCount > 0 && (
               <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">{orderCount}</span>
             )}
           </button>
-
-          {/* Hamburger menu */}
           <button className="border rounded-md p-2" onClick={onOpenMenu}><Menu size={20} /></button>
         </div>
       </div>
@@ -607,8 +597,6 @@ function MobileMenu({ open, onClose, orderCount, scrollToOrder }) {
         >
           <div className="flex justify-between items-center mb-6">
             <h3 className="font-bold">Menu</h3>
-
-            {/* Cart icon also inside mobile menu header */}
             <div className="flex items-center gap-3">
               <button onClick={scrollToOrder} className="relative">
                 <ShoppingCart size={20} />
@@ -616,11 +604,9 @@ function MobileMenu({ open, onClose, orderCount, scrollToOrder }) {
                   <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">{orderCount}</span>
                 )}
               </button>
-
               <button onClick={onClose}><X size={20} /></button>
             </div>
           </div>
-
           <div className="flex flex-col gap-4">
             <a href="#products" onClick={onClose}>Products</a>
             <a href="#order" onClick={onClose}>Order</a>
@@ -631,7 +617,6 @@ function MobileMenu({ open, onClose, orderCount, scrollToOrder }) {
     </AnimatePresence>
   );
 }
-
 
 // ==============================
 // HERO
@@ -673,7 +658,7 @@ function ProductCatalog({ orderItems, setOrderItems }) {
   }, [category, search, sort]);
 
   const handleAddToCart = (product) => {
-    const qty = parseInt(prompt(`Enter quantity for ${product.name}:`, "1"));
+    const qty = parseInt(prompt(`Enter quantity for ${product.name}:`, "1") || "0");
     if (!qty || qty < 1) return;
 
     let price = product.price;
@@ -847,14 +832,12 @@ function ProductCatalog({ orderItems, setOrderItems }) {
 }
 
 // ==============================
-// ORDER / INVOICE GENERATOR
+// ORDER / INVOICE
 // ==============================
-function OrderInvoice({ orderItems, setOrderItems }) {
-  const orderRef = useRef<HTMLDivElement>(null);
+function OrderInvoice({ orderItems, setOrderItems, orderRef }) {
   const [clientInfo, setClientInfo] = useState({ name: "", phone: "", address: "" });
 
   const handleClientChange = (e) => setClientInfo({ ...clientInfo, [e.target.name]: e.target.value });
-
   const removeItem = (id) => setOrderItems(orderItems.filter(item => item.id !== id));
 
   const subtotal = orderItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
@@ -909,7 +892,7 @@ function OrderInvoice({ orderItems, setOrderItems }) {
     window.open(`https://wa.me/${COMPANY.whatsapp}?text=${encodeURIComponent(text)}`, "_blank");
   };
 
-  return (
+   return (
     <section ref={orderRef} id="order" className="max-w-5xl mx-auto px-6 py-20 bg-gray-50 rounded-2xl shadow-md mt-20">
       <h2 className="text-3xl font-bold text-center mb-10">Place Your Order / Invoice</h2>
 
@@ -1001,32 +984,22 @@ function Footer() {
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [orderItems, setOrderItems] = useState([]);
-const orderRef = useRef<HTMLDivElement>(null);
+  const orderRef = useRef<HTMLDivElement>(null);
+
   const scrollToOrder = () => {
     if (orderRef.current) orderRef.current.scrollIntoView({ behavior: "smooth" });
   };
 
- return (
-  <>
-    <SeoHead />
-    <Navbar 
-      onOpenMenu={() => setMenuOpen(true)} 
-      orderCount={orderItems.length} 
-      scrollToOrder={scrollToOrder} 
-    />
-    <MobileMenu 
-      open={menuOpen} 
-      onClose={() => setMenuOpen(false)} 
-      orderCount={orderItems.length} 
-      scrollToOrder={scrollToOrder} 
-    />
-    <Hero />
-    <ProductCatalog orderItems={orderItems} setOrderItems={setOrderItems} />
-    <div ref={orderRef}>
-      <OrderInvoice orderItems={orderItems} setOrderItems={setOrderItems} />
-    </div>
-    <Contact />
-    <Footer />
-  </>
-);
+  return (
+    <>
+      <SeoHead />
+      <Navbar onOpenMenu={() => setMenuOpen(true)} orderCount={orderItems.length} scrollToOrder={scrollToOrder} />
+      <MobileMenu open={menuOpen} onClose={() => setMenuOpen(false)} orderCount={orderItems.length} scrollToOrder={scrollToOrder} />
+      <Hero />
+      <ProductCatalog orderItems={orderItems} setOrderItems={setOrderItems} />
+      <OrderInvoice orderItems={orderItems} setOrderItems={setOrderItems} orderRef={orderRef} />
+      <Contact />
+      <Footer />
+    </>
+  );
 }
