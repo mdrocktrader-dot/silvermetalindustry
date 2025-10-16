@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useRef } from "react";
 import Head from "next/head";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Phone, Search } from "lucide-react";
+import { Menu, X, Phone, Search, ShoppingCart } from "lucide-react";
 import { saveAs } from "file-saver";
 import { Document, Packer, Paragraph, TextRun } from "docx";
 import { jsPDF } from "jspdf";
@@ -52,19 +52,17 @@ const PRODUCTS = [
   { id: "accessories", category: "Roof Cladding", name: "Roofing Accessories", price: 90, img: "/products/accessories.jpg" },
   { id: "translucent", category: "Roof Cladding", name: "Translucent Sheet", price: 200, img: "/products/translucent.jpg" },
   // FENCING PRODUCTS
-{ id: "temporary-hoarding", category: "Fencing", name: "Temporary Hoarding Panels", price: 100, img: "/products/temporary-hoarding.jpg" },
-{ id: "high-security-fence", category: "Fencing", name: "High Security Chain Link Fence", price: 300, img: "/products/high-security-fence.jpg" },
-{ id: "chain-link-gate", category: "Fencing", name: "Chain Link Fence Gate", price: 200, img: "/products/chain-link-gate.jpg" },
-{ id: "chain-link-fence", category: "Fencing", name: "Chain Link Fence", price: 180, img: "/products/chain-link-fence.jpg" },
-{ id: "sand-barrier-fence", category: "Fencing", name: "Sand Barrier Fence", price: 150, img: "/products/sand-barrier-fence.jpg" },
-{ id: "fence-wires", category: "Fencing", name: "Fence Wires & Accessories", price: 90, img: "/products/fence-wires.jpg" },
-{ id: "playground-fence", category: "Fencing", name: "Playground Chain Link Fence", price: 220, img: "/products/playground-fence.jpg" },
-{ id: "wall-mounted-fence", category: "Fencing", name: "Wall Mounted Chain Link Fence", price: 250, img: "/products/wall-mounted-fence.jpg" },
-
+  { id: "temporary-hoarding", category: "Fencing", name: "Temporary Hoarding Panels", price: 100, img: "/products/temporary-hoarding.jpg" },
+  { id: "high-security-fence", category: "Fencing", name: "High Security Chain Link Fence", price: 300, img: "/products/high-security-fence.jpg" },
+  { id: "chain-link-gate", category: "Fencing", name: "Chain Link Fence Gate", price: 200, img: "/products/chain-link-gate.jpg" },
+  { id: "chain-link-fence", category: "Fencing", name: "Chain Link Fence", price: 180, img: "/products/chain-link-fence.jpg" },
+  { id: "sand-barrier-fence", category: "Fencing", name: "Sand Barrier Fence", price: 150, img: "/products/sand-barrier-fence.jpg" },
+  { id: "fence-wires", category: "Fencing", name: "Fence Wires & Accessories", price: 90, img: "/products/fence-wires.jpg" },
+  { id: "playground-fence", category: "Fencing", name: "Playground Chain Link Fence", price: 220, img: "/products/playground-fence.jpg" },
+  { id: "wall-mounted-fence", category: "Fencing", name: "Wall Mounted Chain Link Fence", price: 250, img: "/products/wall-mounted-fence.jpg" },
 ];
 
 const CATEGORIES = ["All", "Aluminium", "Mild Steel", "Building", "Roof Cladding", "Fencing"];
-
 
 // ==============================
 // SEO
@@ -82,7 +80,7 @@ function SeoHead() {
 // ==============================
 // NAVBAR
 // ==============================
-function Navbar({ onOpenMenu }) {
+function Navbar({ onOpenMenu, orderCount, scrollToOrder }) {
   return (
     <header className="w-full bg-white/90 backdrop-blur sticky top-0 z-50 border-b">
       <div className="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
@@ -96,8 +94,13 @@ function Navbar({ onOpenMenu }) {
 
         <nav className="hidden md:flex items-center gap-6 text-sm">
           <a href="#products" className="hover:text-slate-900">Products</a>
-          <a href="#order" className="hover:text-slate-900">Order</a>
           <a href="#contact" className="hover:text-slate-900">Contact</a>
+          <button onClick={scrollToOrder} className="relative">
+            <ShoppingCart size={20} />
+            {orderCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">{orderCount}</span>
+            )}
+          </button>
           <a href={`https://wa.me/${COMPANY.whatsapp}`} target="_blank" className="px-4 py-2 bg-green-600 text-white rounded-md">WhatsApp</a>
         </nav>
 
@@ -121,7 +124,6 @@ function MobileMenu({ open, onClose }) {
           </div>
           <div className="flex flex-col gap-4">
             <a href="#products" onClick={onClose}>Products</a>
-            <a href="#order" onClick={onClose}>Order</a>
             <a href="#contact" onClick={onClose}>Contact</a>
             <a href={`https://wa.me/${COMPANY.whatsapp}`} target="_blank" className="px-4 py-2 mt-4 bg-green-600 text-white rounded-md">WhatsApp</a>
           </div>
@@ -153,7 +155,7 @@ function Hero() {
 // ==============================
 // PRODUCT CATALOG
 // ==============================
-function ProductCatalog() {
+function ProductCatalog({ orderItems, setOrderItems }) {
   const [category, setCategory] = useState("All");
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("");
@@ -164,6 +166,18 @@ function ProductCatalog() {
     if (sort === "high") list = [...list].sort((a,b) => b.price - a.price);
     return list;
   }, [category, search, sort]);
+
+  const handleAddToCart = (product) => {
+    const qty = parseInt(prompt(`Enter quantity for ${product.name}:`, 1));
+    if (!qty || qty < 1) return;
+    const existing = orderItems.find(item => item.id === product.id);
+    if (existing) {
+      setOrderItems(orderItems.map(item => item.id === product.id ? { ...item, quantity: item.quantity + qty } : item));
+    } else {
+      setOrderItems([...orderItems, { ...product, quantity: qty }]);
+    }
+    alert(`${product.name} added to cart`);
+  };
 
   return (
     <section id="products" className="max-w-7xl mx-auto px-6 py-20">
@@ -198,7 +212,11 @@ function ProductCatalog() {
                 <h3 className="font-semibold text-lg">{p.name}</h3>
                 <p className="text-sm text-slate-500 mt-1">{p.category}</p>
                 <p className="text-green-600 font-bold mt-2">AED {p.price}</p>
-                <a href={`https://wa.me/${COMPANY.whatsapp}?text=Hello,%20I'm%20interested%20in%20${encodeURIComponent(p.name)}`} target="_blank" className="mt-4 inline-block w-full text-center bg-green-600 text-white rounded-md py-2 text-sm">Inquire on WhatsApp</a>
+                <div className="mt-4 flex flex-col gap-2">
+                  <a href={`https://wa.me/${COMPANY.whatsapp}?text=Hello,%20I'm%20interested%20in%20${encodeURIComponent(p.name)}`} target="_blank" className="inline-block w-full text-center bg-green-600 text-white rounded-md py-2 text-sm">Inquire on WhatsApp</a>
+                  <a href={`mailto:${COMPANY.email}?subject=Inquiry about ${encodeURIComponent(p.name)}`} className="inline-block w-full text-center bg-blue-600 text-white rounded-md py-2 text-sm">Inquire via Email</a>
+                  <button onClick={()=>handleAddToCart(p)} className="inline-block w-full text-center bg-gray-600 text-white rounded-md py-2 text-sm">Add to Cart</button>
+                </div>
               </div>
             </motion.div>
           ))}
@@ -211,30 +229,13 @@ function ProductCatalog() {
 }
 
 // ==============================
-// ORDER / INVOICE GENERATOR (UPDATED)
+// ORDER / INVOICE GENERATOR
 // ==============================
-function OrderInvoice() {
-  const [orderItems, setOrderItems] = useState([]);
-  const [selectedProduct, setSelectedProduct] = useState("");
-  const [quantity, setQuantity] = useState(1);
-
-  // New client info fields
+function OrderInvoice({ orderItems, setOrderItems }) {
+  const orderRef = useRef();
   const [clientInfo, setClientInfo] = useState({ name: "", phone: "", address: "" });
 
   const handleClientChange = (e) => setClientInfo({ ...clientInfo, [e.target.name]: e.target.value });
-
-  const addItem = () => {
-    if (!selectedProduct) return;
-    const product = PRODUCTS.find(p => p.id === selectedProduct);
-    const existing = orderItems.find(item => item.id === product.id);
-    if (existing) {
-      setOrderItems(orderItems.map(item => item.id === product.id ? { ...item, quantity: item.quantity + quantity } : item));
-    } else {
-      setOrderItems([...orderItems, { ...product, quantity }]);
-    }
-    setSelectedProduct("");
-    setQuantity(1);
-  };
 
   const removeItem = (id) => setOrderItems(orderItems.filter(item => item.id !== id));
 
@@ -291,7 +292,7 @@ function OrderInvoice() {
   };
 
   return (
-    <section id="order" className="max-w-5xl mx-auto px-6 py-20 bg-gray-50 rounded-2xl shadow-md mt-20">
+    <section ref={orderRef} id="order" className="max-w-5xl mx-auto px-6 py-20 bg-gray-50 rounded-2xl shadow-md mt-20">
       <h2 className="text-3xl font-bold text-center mb-10">Place Your Order / Invoice</h2>
 
       {/* Client Info */}
@@ -299,16 +300,6 @@ function OrderInvoice() {
         <input type="text" name="name" placeholder="Client Name" value={clientInfo.name} onChange={handleClientChange} className="border rounded-md p-2 flex-1" />
         <input type="text" name="phone" placeholder="Phone Number" value={clientInfo.phone} onChange={handleClientChange} className="border rounded-md p-2 flex-1" />
         <input type="text" name="address" placeholder="Address" value={clientInfo.address} onChange={handleClientChange} className="border rounded-md p-2 flex-1" />
-      </div>
-
-      {/* Select Product */}
-      <div className="flex flex-wrap gap-4 mb-6 justify-center items-center">
-        <select value={selectedProduct} onChange={e => setSelectedProduct(e.target.value)} className="border rounded-md p-2">
-          <option value="">Select Product</option>
-          {PRODUCTS.map(p => <option key={p.id} value={p.id}>{p.name} - AED {p.price}</option>)}
-        </select>
-        <input type="number" min={1} value={quantity} onChange={e => setQuantity(parseInt(e.target.value))} className="border rounded-md p-2 w-20" />
-        <button onClick={addItem} className="bg-green-600 text-white px-4 py-2 rounded-md">Add Item</button>
       </div>
 
       {/* Order Table */}
@@ -354,57 +345,23 @@ function OrderInvoice() {
           </div>
         </div>
       ) : (
-        <p className="text-center text-gray-500">No items in the order yet.</p>
+        <p className="text-center text-gray-500">No items in the order yet. Add products from the catalog.</p>
       )}
     </section>
   );
 }
 
-
 // ==============================
 // CONTACT
 // ==============================
 function Contact() {
-  const [formData,setFormData] = useState({name:"",email:"",company:"",message:""});
-  const handleChange = (e)=>setFormData({...formData,[e.target.name]:e.target.value});
-  const handleWhatsApp = ()=>window.open(`https://wa.me/${COMPANY.whatsapp}?text=${encodeURIComponent(`Hello Silver Metal Industry,%0A%0AHere are my details:%0AName:${formData.name}%0ACompany:${formData.company}%0AEmail:${formData.email}%0AMessage:${formData.message}`)}`,"_blank");
-  const handleEmail = ()=>window.location.href=`mailto:${COMPANY.email}?subject=${encodeURIComponent("Inquiry from Silver Metal Industry Website")}&body=${encodeURIComponent(`Hello Silver Metal Team,%0A%0AHere are my details:%0AName:${formData.name}%0ACompany:${formData.company}%0AEmail:${formData.email}%0AMessage:${formData.message}`)}`;
-  const handleDownloadWord = async ()=>{
-
-  const doc = new Document({sections:[{children:[
-      new Paragraph({children:[new TextRun({text:"Silver Metal Industry Inquiry",bold:true,size:28})]}),
-      new Paragraph(""),
-      new Paragraph(`Name: ${formData.name}`),
-      new Paragraph(`Company: ${formData.company}`),
-      new Paragraph(`Email: ${formData.email}`),
-      new Paragraph(`Message: ${formData.message}`)
-    ]}]});
-    const blob = await Packer.toBlob(doc);
-    saveAs(blob,"SilverMetalInquiry.docx");
-  };
-
   return (
-    <section id="contact" className="bg-gradient-to-b from-slate-50 to-white py-20">
-      <div className="max-w-5xl mx-auto px-6 text-center">
-        <motion.h2 className="text-4xl font-bold mb-10 text-gray-800" initial={{opacity:0,y:30}} whileInView={{opacity:1,y:0}} transition={{duration:0.6}}>Contact Us</motion.h2>
-        <motion.div initial={{opacity:0,scale:0.9}} whileInView={{opacity:1,scale:1}} transition={{duration:0.5}} className="bg-white/80 backdrop-blur-xl rounded-2xl shadow-2xl p-8 max-w-lg mx-auto">
-          <form className="space-y-4">
-            <input type="text" name="name" placeholder="Your Name" value={formData.name} onChange={handleChange} className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" required />
-            <input type="email" name="email" placeholder="Your Email" value={formData.email} onChange={handleChange} className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" required />
-            <input type="text" name="company" placeholder="Your Company" value={formData.company} onChange={handleChange} className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-            <textarea name="message" rows={4} placeholder="Your Message" value={formData.message} onChange={handleChange} className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" required></textarea>
-            <div className="flex flex-col sm:flex-row justify-center gap-4 mt-6">
-              <button type="button" onClick={handleWhatsApp} className="w-full sm:w-auto bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-all">📱 WhatsApp Now</button>
-              <button type="button" onClick={handleEmail} className="w-full sm:w-auto bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-all">✉️ Send Email</button>
-              <button type="button" onClick={handleDownloadWord} className="w-full sm:w-auto bg-slate-600 text-white px-6 py-3 rounded-lg hover:bg-slate-700 transition-all">💾 Save as Word</button>
-            </div>
-          </form>
-          <div className="mt-10 text-gray-600">
-            <p>📍 {COMPANY.location}</p>
-            <p>📞 +{COMPANY.whatsapp}</p>
-            <p>✉️ {COMPANY.email}</p>
-          </div>
-        </motion.div>
+    <section id="contact" className="max-w-5xl mx-auto px-6 py-20">
+      <h2 className="text-3xl font-bold text-center mb-10">Contact Us</h2>
+      <div className="text-center text-slate-700">
+        <p>Email: {COMPANY.email}</p>
+        <p>WhatsApp: {COMPANY.whatsapp}</p>
+        <p>Location: {COMPANY.location}</p>
       </div>
     </section>
   );
@@ -415,28 +372,34 @@ function Contact() {
 // ==============================
 function Footer() {
   return (
-    <footer className="bg-slate-900 text-white py-6 mt-20">
-      <div className="max-w-7xl mx-auto px-6 text-center text-sm">
-        &copy; {new Date().getFullYear()} {COMPANY.name}. All rights reserved.
-      </div>
+    <footer className="bg-slate-900 text-white py-6 text-center">
+      <p>&copy; {new Date().getFullYear()} {COMPANY.name}. All rights reserved.</p>
     </footer>
   );
 }
 
 // ==============================
-// PAGE
+// MAIN PAGE
 // ==============================
 export default function Home() {
-  const [menuOpen,setMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [orderItems, setOrderItems] = useState([]);
+  const orderRef = useRef();
+
+  const scrollToOrder = () => {
+    if (orderRef.current) orderRef.current.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <>
       <SeoHead />
-      <Navbar onOpenMenu={()=>setMenuOpen(true)} />
-      <MobileMenu open={menuOpen} onClose={()=>setMenuOpen(false)} />
+      <Navbar onOpenMenu={() => setMenuOpen(true)} orderCount={orderItems.length} scrollToOrder={scrollToOrder} />
+      <MobileMenu open={menuOpen} onClose={() => setMenuOpen(false)} />
       <Hero />
-      <ProductCatalog />
-      <OrderInvoice />
+      <ProductCatalog orderItems={orderItems} setOrderItems={setOrderItems} />
+      <div ref={orderRef}>
+        <OrderInvoice orderItems={orderItems} setOrderItems={setOrderItems} />
+      </div>
       <Contact />
       <Footer />
     </>
