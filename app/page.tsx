@@ -133,7 +133,7 @@ export function Nav({ orderCount }: NavbarProps) {
             </button>
 
             <a
-              href="https://wa.me/971501234567"
+              href="https://wa.me/+971526551620"
               target="_blank"
               rel="noreferrer"
               className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition"
@@ -204,8 +204,8 @@ export function Nav({ orderCount }: NavbarProps) {
 export const COMPANY = {
   name: "Silver Metal Industry",
   location: "Sharjah, UAE",
-  whatsapp: "+971500000000",
-  email: "info@silvermetal.com",
+  whatsapp: "+971526551620",
+  email: "mdrocktrader@gmail.com",
   tagline: "High-quality building materials",
   vatPercentage: 5,
 
