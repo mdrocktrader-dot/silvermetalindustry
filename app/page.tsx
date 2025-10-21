@@ -99,7 +99,7 @@ function Nav({ orderCount }: NavbarProps) {
       <div className="bg-white/90 backdrop-blur border-b">
         <div className="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
           {/* Logo */}
-          <a href="/logo.png" className="flex items-center gap-3">
+          <a href="/logo" className="flex items-center gap-3">
             <img
               src="/logo.png"
               alt="Logo"
@@ -227,8 +227,8 @@ const PRODUCTS = [
     category: "Aluminium",
     name: "Angle Aluminium",
     price: 120,
-    img: "/mild-steel-001.jpeg",
-    images: ["/mild-steel-001.jpeg", "/mild-steel-001.jpeg"],
+    img: "/Angle Aluminum.jpg",
+    images: ["/Angle Aluminum.jpg", "/Angle Aluminum.jpg"],
     specs: { Dimensions: "50x50mm", Thickness: "2mm", Certification: "ISO 9001" },
     bulkPricing: [
       { min: 1, max: 10, price: 120 },
@@ -241,8 +241,8 @@ const PRODUCTS = [
     category: "Aluminium",
     name: "Pre-Painted Aluminium Coil/Sheet",
     price: 250,
-    img: "/products/prepainted-coil.jpg",
-    images: ["/products/prepainted-coil.jpg", "/products/prepainted-coil2.jpg"],
+    img: "/Pre-Painted GI Steel Coils.jpg",
+    images: ["/Pre-Painted GI Steel Coils.jpg", "/Pre-Painted GI Steel Coils.jpg"],
     specs: { Width: "1000mm", Thickness: "0.5mm", Coating: "PVDF" },
     bulkPricing: [
       { min: 1, max: 10, price: 250 },
@@ -271,8 +271,8 @@ const PRODUCTS = [
     category: "Mild Steel",
     name: "MS Square Tube",
     price: 180,
-    img: "/products/ms-tube.jpg",
-    images: ["/products/ms-tube.jpg", "/products/ms-tube2.jpg"],
+    img: "/MS Square Tube.jpg",
+    images: ["/MS Square Tube.jpg", "/MS Square Tube.jpg"],
     specs: { Dimensions: "40x40mm", Thickness: "2mm", Material: "Mild Steel" },
     bulkPricing: [
       { min: 1, max: 10, price: 180 },
@@ -285,8 +285,8 @@ const PRODUCTS = [
     category: "Mild Steel",
     name: "MS Pipes",
     price: 170,
-    img: "/products/ms-pipe.jpg",
-    images: ["/products/ms-pipe.jpg", "/products/ms-pipe2.jpg"],
+    img: "/MS Pipes.jpg",
+    images: ["/MS Pipes.jpg", "/MS Pipes.jpg"],
     specs: { Diameter: "50mm", Thickness: "2mm", Material: "Mild Steel" },
     bulkPricing: [
       { min: 1, max: 10, price: 170 },
@@ -299,8 +299,8 @@ const PRODUCTS = [
     category: "Mild Steel",
     name: "MS Angle",
     price: 160,
-    img: "/products/ms-angle.jpg",
-    images: ["/products/ms-angle.jpg", "/products/ms-angle2.jpg"],
+    img: "/MS Angle.jpg",
+    images: ["/MS Angle.jpg", "/MS Angle.jpg"],
     specs: { Dimensions: "50x50mm", Thickness: "3mm", Material: "Mild Steel" },
     bulkPricing: [
       { min: 1, max: 10, price: 160 },
@@ -313,8 +313,8 @@ const PRODUCTS = [
     category: "Mild Steel",
     name: "I Beam",
     price: 300,
-    img: "/products/i-beam.jpg",
-    images: ["/products/i-beam.jpg", "/products/i-beam2.jpg"],
+    img: "/I Beam.jpg",
+    images: ["/I Beam.jpg", "/I Beam.jpg"],
     specs: { Dimensions: "200x100mm", Material: "Mild Steel", Standard: "ASTM A36" },
     bulkPricing: [
       { min: 1, max: 10, price: 300 },
@@ -327,8 +327,8 @@ const PRODUCTS = [
     category: "Mild Steel",
     name: "H Beam",
     price: 310,
-    img: "/products/h-beam.jpg",
-    images: ["/products/h-beam.jpg", "/products/h-beam2.jpg"],
+    img: "/H Beam.jpg",
+    images: ["/H Beam.jpg", "/H Beam.jpg"],
     specs: { Dimensions: "200x150mm", Material: "Mild Steel", Standard: "ASTM A36" },
     bulkPricing: [
       { min: 1, max: 10, price: 310 },
@@ -341,8 +341,8 @@ const PRODUCTS = [
     category: "Mild Steel",
     name: "HR Coils & Sheets",
     price: 220,
-    img: "/products/hr-coil.jpg",
-    images: ["/products/hr-coil.jpg", "/products/hr-coil2.jpg"],
+    img: "/HR Coils & Sheets.jpg",
+    images: ["/HR Coils & Sheets.jpg", "/HR Coils & Sheets.jpg"],
     specs: { Thickness: "1mm", Material: "Mild Steel", Standard: "HR" },
     bulkPricing: [
       { min: 1, max: 10, price: 220 },
@@ -355,8 +355,8 @@ const PRODUCTS = [
     category: "Mild Steel",
     name: "Galvanized Steel Sheets",
     price: 240,
-    img: "/products/galv-sheet.jpg",
-    images: ["/products/galv-sheet.jpg", "/products/galv-sheet2.jpg"],
+    img: "/Galvanized Steel Sheets.jpg",
+    images: ["/Galvanized Steel Sheets.jpg", "/Galvanized Steel Sheets.jpg"],
     specs: { Thickness: "0.8mm", Coating: "Zinc", Standard: "ISO 1461" },
     bulkPricing: [
       { min: 1, max: 10, price: 240 },
@@ -369,8 +369,8 @@ const PRODUCTS = [
     category: "Mild Steel",
     name: "Pre-Painted GI Steel Coils",
     price: 260,
-    img: "/products/prepainted-gi.jpg",
-    images: ["/products/prepainted-gi.jpg", "/products/prepainted-gi2.jpg"],
+    img: "/Pre-Painted GI Steel Coils.jpg",
+    images: ["/Pre-Painted GI Steel Coils.jpg", "/Pre-Painted GI Steel Coils.jpg"],
     specs: { Width: "1000mm", Coating: "Color Coated", Material: "GI Steel" },
     bulkPricing: [
       { min: 1, max: 10, price: 260 },
@@ -383,8 +383,8 @@ const PRODUCTS = [
     category: "Mild Steel",
     name: "Cold Rolled Coils",
     price: 230,
-    img: "/products/cr-coil.jpg",
-    images: ["/products/cr-coil.jpg", "/products/cr-coil2.jpg"],
+    img: "/Cold Rolled Coils.jpg",
+    images: ["/Cold Rolled Coils.jpg", "/Cold Rolled Coils.jpg"],
     specs: { Thickness: "0.6mm", Material: "Mild Steel", Standard: "CR" },
     bulkPricing: [
       { min: 1, max: 10, price: 230 },
@@ -399,8 +399,8 @@ const PRODUCTS = [
     category: "Building",
     name: "Galvanized Decking Sheet",
     price: 150,
-    img: "/products/decking-sheet.jpg",
-    images: ["/products/decking-sheet.jpg", "/products/decking-sheet2.jpg"],
+    img: "/Galvanized Decking Sheet.jpg",
+    images: ["/Galvanized Decking Sheet.jpg", "/Galvanized Decking Sheet.jpg"],
     specs: { Length: "3m", Width: "1m", Material: "Galvanized Steel" },
     bulkPricing: [
       { min: 1, max: 10, price: 150 },
@@ -413,8 +413,8 @@ const PRODUCTS = [
     category: "Building",
     name: "Slotted Channel",
     price: 90,
-    img: "/products/slotted-channel.jpg",
-    images: ["/products/slotted-channel.jpg", "/products/slotted-channel2.jpg"],
+    img: "/Slotted Channel.jpg",
+    images: ["/Slotted Channel.jpg", "/Slotted Channel.jpg"],
     specs: { Length: "3m", Width: "50mm", Material: "Galvanized Steel" },
     bulkPricing: [
       { min: 1, max: 10, price: 90 },
@@ -427,8 +427,8 @@ const PRODUCTS = [
     category: "Building",
     name: "Non-Slotted Channel",
     price: 95,
-    img: "/products/non-slotted.jpg",
-    images: ["/products/non-slotted.jpg", "/products/non-slotted2.jpg"],
+    img: "/Non-Slotted Channel.jpg",
+    images: ["/Non-Slotted Channel.jpg", "/Non-Slotted Channel.jpg"],
     specs: { Length: "3m", Width: "50mm", Material: "Galvanized Steel" },
     bulkPricing: [
       { min: 1, max: 10, price: 95 },
@@ -441,8 +441,8 @@ const PRODUCTS = [
     category: "Building",
     name: "Galvanized U Channel",
     price: 110,
-    img: "aluminium-001.jpg",
-    images: ["aluminium-001.jpg", "aluminium-001.jpg"],
+    img: "Galvanized U Channel.jpg",
+    images: ["Galvanized U Channel.jpg", "Galvanized U Channel.jpg"],
     specs: { Length: "3m", Width: "50mm", Material: "Galvanized Steel" },
     bulkPricing: [
       { min: 1, max: 10, price: 110 },
@@ -457,8 +457,8 @@ const PRODUCTS = [
     category: "Roof Cladding",
     name: "Galvanized Profile Sheet",
     price: 220,
-    img: "/products/galv-profile.jpg",
-    images: ["/products/galv-profile.jpg", "/products/galv-profile2.jpg"],
+    img: "/Galvanized Profile Sheet.jpg",
+    images: ["/Galvanized Profile Sheet.jpg", "/Galvanized Profile Sheet.jpg"],
     specs: { Length: "6m", Material: "Galvanized Steel", Profile: "Corrugated" },
     bulkPricing: [
       { min: 1, max: 10, price: 220 },
@@ -614,8 +614,8 @@ const PRODUCTS = [
   category: "Fencing",
   name: "Temporary Hoarding Panels",
   price: 100,
-  img: "/products/temporary-hoarding.jpg",
-  images: ["/products/temporary-hoarding.jpg", "/products/temporary-hoarding2.jpg"],
+  img: "/Temporary Hoarding Panels.jpg",
+  images: ["/Temporary Hoarding Panels.jpg", "/Temporary Hoarding Panels.jpg"],
   specs: { Height: "2m", Material: "Galvanized Steel" },
   bulkPricing: [
     { min: 1, max: 10, price: 100 },
@@ -628,8 +628,8 @@ const PRODUCTS = [
   category: "Fencing",
   name: "High Security Chain Link Fence",
   price: 300,
-  img: "/products/high-security-fence.jpg",
-  images: ["/products/high-security-fence.jpg", "/products/high-security-fence2.jpg"],
+  img: "/High Security Chain Link Fence.jpg",
+  images: ["/High Security Chain Link Fence.jpg", "/High Security Chain Link Fence.jpg"],
   specs: { Height: "2.5m", Material: "Steel", Coating: "Galvanized" },
   bulkPricing: [
     { min: 1, max: 10, price: 300 },
