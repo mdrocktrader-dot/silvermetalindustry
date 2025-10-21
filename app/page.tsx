@@ -101,7 +101,7 @@ function Nav({ orderCount }: NavbarProps) {
           {/* Logo */}
           <a href="/logo" className="flex items-center gap-3">
             <img
-              src="/logo.png"
+              src="/logo.jpg"
               alt="Logo"
               className="w-12 h-12 rounded-md object-contain"
             />
@@ -839,7 +839,7 @@ import "slick-carousel/slick/slick-theme.css";
 const images = [
   '/hero-bg.jpg',
   '/hero-bg1.webp',
-  '/hero-bg2.jpg'
+  '/hero-bg2.jpg',
 ];
 
 const sliderSettings = {
@@ -1566,24 +1566,23 @@ function Contact() {
 // FOOTER
 // ==============================
 
+const socialLinks = [
+  { name: "Facebook", icon: <FaFacebookF />, url: COMPANY.facebook },
+  { name: "Instagram", icon: <FaInstagram />, url: COMPANY.instagram },
+  { name: "LinkedIn", icon: <FaLinkedinIn />, url: COMPANY.linkedin },
+  { name: "YouTube", icon: <FaYoutube />, url: COMPANY.youtube },
+  { name: "WhatsApp", icon: <FaWhatsapp />, url: `https://wa.me/${COMPANY.whatsapp.replace(/[^0-9]/g, "")}` },
+];
 
-function Footer() {
-  const socialLinks = [
-    { name: "Facebook", icon: <FaFacebookF />, url: COMPANY.facebook },
-    { name: "Instagram", icon: <FaInstagram />, url: COMPANY.instagram },
-    { name: "LinkedIn", icon: <FaLinkedinIn />, url: COMPANY.linkedin },
-    { name: "YouTube", icon: <FaYoutube />, url: COMPANY.youtube },
-    { name: "WhatsApp", icon: <FaWhatsapp />, url: `https://wa.me/${COMPANY.whatsapp.replace(/[^0-9]/g, "")}` },
-  ];
+const quickLinks = [
+  { name: "Home", href: "#", icon: <FaHome /> },
+  { name: "About Us", href: "#about", icon: <FaInfoCircle /> },
+  { name: "Products", href: "#products", icon: <FaBoxOpen /> },
+  { name: "Services", href: "#services", icon: <FaBoxOpen /> },
+  { name: "Contact", href: "#contact", icon: <FaEnvelope /> },
+];
 
-  const quickLinks = [
-    { name: "Home", href: "#", icon: <FaHome /> },
-    { name: "About Us", href: "#about", icon: <FaInfoCircle /> },
-    { name: "Products", href: "#products", icon: <FaBoxOpen /> },
-    { name: "Services", href: "#services", icon: <FaBoxOpen /> },
-    { name: "Contact", href: "#contact", icon: <FaEnvelope /> },
-  ];
-
+ function Footer() {
   return (
     <footer className="bg-slate-900 text-white relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-12">
@@ -1595,11 +1594,25 @@ function Footer() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
+          {/* Owner Logo */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6 }}
+            className="w-24 h-24 rounded-full overflow-hidden border-2 border-white shadow-lg"
+          >
+            <img
+              src="/owner.jpeg" // Replace with your actual logo path
+              alt="Owner Logo"
+              className="w-full h-full object-cover"
+            />
+          </motion.div>
+
           <h2 className="text-2xl md:text-3xl font-bold text-center md:text-left">{COMPANY.name}</h2>
           <p className="text-gray-400 text-center md:text-left">
             Trusted provider of high-quality building materials with years of experience and loyalty to our clients.
           </p>
-          <p className="flex items-center gap-2 text-gray-400 mt-2"><FaPhone /> {COMPANY.whatsapp}</p>
+          <p className="flex items-center gap-2 text-gray-400 mt-2"><FaWhatsapp /> {COMPANY.whatsapp}</p>
           <p className="flex items-center gap-2 text-gray-400"><FaEnvelope /> {COMPANY.email}</p>
           <p className="flex items-center gap-2 text-gray-400"><FaHome /> {COMPANY.location}</p>
         </motion.div>
