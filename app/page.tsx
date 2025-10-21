@@ -99,7 +99,7 @@ function Nav({ orderCount }: NavbarProps) {
       <div className="bg-white/90 backdrop-blur border-b">
         <div className="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-3">
+          <a href="/logo.png" className="flex items-center gap-3">
             <img
               src="/logo.png"
               alt="Logo"
