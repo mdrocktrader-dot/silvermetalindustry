@@ -571,8 +571,8 @@ const PRODUCTS = [
   category: "Roof Cladding",
   name: "Alu-Zinc Profile Sheet",
   price: 230,
-  img: "/Alu-Zinc Profile Shee.jpg",
-  images: ["/Alu-Zinc Profile Shee.jpg", "/Alu-Zinc Profile Shee.jpg"],
+  img: "/Alu-Zinc Profile Sheet.jpg",
+  images: ["/Alu-Zinc Profile Sheet.jpg", "/Alu-Zinc Profile Sheet.jpg"],
   specs: { Length: "6m", Material: "Alu-Zinc Steel", Coating: "Galvalume" },
   bulkPricing: [
     { min: 1, max: 10, price: 230 },
@@ -641,8 +641,8 @@ const PRODUCTS = [
   category: "Roof Cladding",
   name: "PIR Wall Panel",
   price: 390,
-  img: "/.jpg",
-  images: ["/.jpg", "/.jpg"],
+  img: "/PIR Wall Panel.jpg",
+  images: ["/PIR Wall Panel.jpg", "/PIR Wall Panel.jpg"],
   specs: { Thickness: "40mm", Core: "PIR Foam", Facing: "Aluminium Sheet" },
   bulkPricing: [
     { min: 1, max: 10, price: 390 },
