@@ -221,6 +221,119 @@ const COMPANY = {
 // PRODUCTS
 // ==============================
 const PRODUCTS = [
+  // ================= Fencing =================
+{
+  id: "temporary-hoarding",
+  category: "Fencing",
+  name: "Temporary Hoarding Panels",
+  price: 100,
+  img: "/Temporary Hoarding Panels.jpg",
+  images: ["/Temporary Hoarding Panels.jpg", "/Temporary Hoarding Panels.jpg"],
+  specs: { Height: "2m", Material: "Galvanized Steel" },
+  bulkPricing: [
+    { min: 1, max: 10, price: 100 },
+    { min: 11, max: 50, price: 95 },
+    { min: 51, max: 9999, price: 90 },
+  ],
+},
+{
+  id: "high-security-fence",
+  category: "Fencing",
+  name: "High Security Chain Link Fence",
+  price: 300,
+  img: "/High Security Chain Link Fence.jpg",
+  images: ["/High Security Chain Link Fence.jpg", "/High Security Chain Link Fence.jpg"],
+  specs: { Height: "2.5m", Material: "Steel", Coating: "Galvanized" },
+  bulkPricing: [
+    { min: 1, max: 10, price: 300 },
+    { min: 11, max: 50, price: 290 },
+    { min: 51, max: 9999, price: 280 },
+  ],
+},
+{
+  id: "chain-link-gate",
+  category: "Fencing",
+  name: "Chain Link Fence Gate",
+  price: 200,
+  img: "/Chain Link Fence Gate.jpg",
+  images: ["/Chain Link Fence Gate.jpg", "/Chain Link Fence Gate.jpg"],
+  specs: { Width: "3m", Material: "Steel", Coating: "Galvanized" },
+  bulkPricing: [
+    { min: 1, max: 10, price: 200 },
+    { min: 11, max: 50, price: 190 },
+    { min: 51, max: 9999, price: 180 },
+  ],
+},
+{
+  id: "chain-link-fence",
+  category: "Fencing",
+  name: "Chain Link Fence",
+  price: 180,
+  img: "/Chain Link Fence.jpg",
+  images: ["/Chain Link Fence.jpg", "/Chain Link Fence.jpg"],
+  specs: { Height: "2m", Material: "Steel", Coating: "Galvanized" },
+  bulkPricing: [
+    { min: 1, max: 10, price: 180 },
+    { min: 11, max: 50, price: 170 },
+    { min: 51, max: 9999, price: 160 },
+  ],
+},
+{
+  id: "sand-barrier-fence",
+  category: "Fencing",
+  name: "Sand Barrier Fence",
+  price: 150,
+  img: "/Sand Barrier Fence.jpg",
+  images: ["/Sand Barrier Fence.jpg", "/Sand Barrier Fence.jpg"],
+  specs: { Height: "1.5m", Material: "Steel", Coating: "Galvanized" },
+  bulkPricing: [
+    { min: 1, max: 10, price: 150 },
+    { min: 11, max: 50, price: 145 },
+    { min: 51, max: 9999, price: 140 },
+  ],
+},
+{
+  id: "fence-wires",
+  category: "Fencing",
+  name: "Fence Wires & Accessories",
+  price: 90,
+  img: "/Fence Wires & Accessories.jpg",
+  images: ["/Fence Wires & Accessories.jpg", "/Fence Wires & Accessories.jpg"],
+  specs: { Type: "Wire Rolls, Clips, Fasteners", Material: "Steel" },
+  bulkPricing: [
+    { min: 1, max: 10, price: 90 },
+    { min: 11, max: 50, price: 85 },
+    { min: 51, max: 9999, price: 80 },
+  ],
+},
+{
+  id: "playground-fence",
+  category: "Fencing",
+  name: "Playground Chain Link Fence",
+  price: 220,
+  img: "/Playground Chain Link Fence.jpg",
+  images: ["/Playground Chain Link Fence.jpg", "/Playground Chain Link Fence.jpg"],
+  specs: { Height: "2m", Material: "Steel", Coating: "Galvanized" },
+  bulkPricing: [
+    { min: 1, max: 10, price: 220 },
+    { min: 11, max: 50, price: 210 },
+    { min: 51, max: 9999, price: 200 },
+  ],
+},
+{
+  id: "wall-mounted-fence",
+  category: "Fencing",
+  name: "Wall Mounted Chain Link Fence",
+  price: 250,
+  img: "/Wall Mounted Chain Link Fence.jpg",
+  images: ["/Wall Mounted Chain Link Fence.jpg", "/Wall Mounted Chain Link Fence.jpg"],
+  specs: { Height: "2m", Material: "Steel", Coating: "Galvanized" },
+  bulkPricing: [
+    { min: 1, max: 10, price: 250 },
+    { min: 11, max: 50, price: 240 },
+    { min: 51, max: 9999, price: 230 },
+  ],
+},
   // ================= Aluminium =================
   {
     id: "angle-al",
@@ -451,29 +564,15 @@ const PRODUCTS = [
     ],
   },
 
-  // ================= Roof Cladding =================
-  {
-    id: "galv-profile",
-    category: "Roof Cladding",
-    name: "Galvanized Profile Sheet",
-    price: 220,
-    img: "/Galvanized Profile Sheet.jpg",
-    images: ["/Galvanized Profile Sheet.jpg", "/Galvanized Profile Sheet.jpg"],
-    specs: { Length: "6m", Material: "Galvanized Steel", Profile: "Corrugated" },
-    bulkPricing: [
-      { min: 1, max: 10, price: 220 },
-      { min: 11, max: 50, price: 215 },
-      { min: 51, max: 9999, price: 210 },
-    ],
-  },
+ 
   // ================= Roof Cladding =================
 {
   id: "aluzinc",
   category: "Roof Cladding",
   name: "Alu-Zinc Profile Sheet",
   price: 230,
-  img: "/products/aluzinc.jpg",
-  images: ["/products/aluzinc.jpg", "/products/aluzinc2.jpg"],
+  img: "/Alu-Zinc Profile Shee.jpg",
+  images: ["/Alu-Zinc Profile Shee.jpg", "/Alu-Zinc Profile Shee.jpg"],
   specs: { Length: "6m", Material: "Alu-Zinc Steel", Coating: "Galvalume" },
   bulkPricing: [
     { min: 1, max: 10, price: 230 },
@@ -486,8 +585,8 @@ const PRODUCTS = [
   category: "Roof Cladding",
   name: "Aluminium Profile Sheet",
   price: 250,
-  img: "/products/aluminium-profile.jpg",
-  images: ["/products/aluminium-profile.jpg", "/products/aluminium-profile2.jpg"],
+  img: "/Aluminium Profile Sheet.jpg",
+  images: ["/Aluminium Profile Sheet.jpg", "/Aluminium Profile Sheet.jpg"],
   specs: { Length: "6m", Material: "Aluminium", Profile: "Corrugated" },
   bulkPricing: [
     { min: 1, max: 10, price: 250 },
@@ -500,8 +599,8 @@ const PRODUCTS = [
   category: "Roof Cladding",
   name: "PUR Sandwich Panel",
   price: 400,
-  img: "/products/pur-panel.jpg",
-  images: ["/products/pur-panel.jpg", "/products/pur-panel2.jpg"],
+  img: "/PUR Sandwich Panel.jpg",
+  images: ["/PUR Sandwich Panel.jpg", "/PUR Sandwich Panel.jpg"],
   specs: { Thickness: "50mm", Core: "PUR Foam", Facing: "Galvanized Steel" },
   bulkPricing: [
     { min: 1, max: 10, price: 400 },
@@ -514,8 +613,8 @@ const PRODUCTS = [
   category: "Roof Cladding",
   name: "PIR Sandwich Panel",
   price: 420,
-  img: "/products/pir-panel.jpg",
-  images: ["/products/pir-panel.jpg", "/products/pir-panel2.jpg"],
+  img: "/PIR Sandwich Panel.jpg",
+  images: ["/PIR Sandwich Panel.jpg", "/PIR Sandwich Panel.jpg"],
   specs: { Thickness: "50mm", Core: "PIR Foam", Facing: "Aluminium Sheet" },
   bulkPricing: [
     { min: 1, max: 10, price: 420 },
@@ -528,8 +627,8 @@ const PRODUCTS = [
   category: "Roof Cladding",
   name: "PUR Wall Panel",
   price: 380,
-  img: "/Alu-Zinc Profile Sheet.jpg",
-  images: ["/products/pur-wall.jpg", "/products/pur-wall2.jpg"],
+  img: "/PUR Wall Panel.jpg",
+  images: ["/PUR Wall Panel.jpg", "/PUR Wall Panel.jpg"],
   specs: { Thickness: "40mm", Core: "PUR Foam", Facing: "Galvanized Steel" },
   bulkPricing: [
     { min: 1, max: 10, price: 380 },
@@ -542,8 +641,8 @@ const PRODUCTS = [
   category: "Roof Cladding",
   name: "PIR Wall Panel",
   price: 390,
-  img: "/products/pir-wall.jpg",
-  images: ["/products/pir-wall.jpg", "/products/pir-wall2.jpg"],
+  img: "/.jpg",
+  images: ["/.jpg", "/.jpg"],
   specs: { Thickness: "40mm", Core: "PIR Foam", Facing: "Aluminium Sheet" },
   bulkPricing: [
     { min: 1, max: 10, price: 390 },
@@ -556,8 +655,8 @@ const PRODUCTS = [
   category: "Roof Cladding",
   name: "Tile Profile Sheet",
   price: 270,
-  img: "/products/tile-sheet.jpg",
-  images: ["/products/tile-sheet.jpg", "/products/tile-sheet2.jpg"],
+  img: "/Tile Profile Sheet.jpg",
+  images: ["/Tile Profile Sheet.jpg", "/Tile Profile Sheet.jpg"],
   specs: { Length: "6m", Material: "Galvanized Steel", Profile: "Tile Shape" },
   bulkPricing: [
     { min: 1, max: 10, price: 270 },
@@ -570,8 +669,8 @@ const PRODUCTS = [
   category: "Roof Cladding",
   name: "Metal Z & C Purlin",
   price: 310,
-  img: "/products/purlin.jpg",
-  images: ["/products/purlin.jpg", "/products/purlin2.jpg"],
+  img: "/Metal Z & C Purlin.jpg",
+  images: ["/Metal Z & C Purlin.jpg", "/Metal Z & C Purlin.jpg"],
   specs: { Length: "6m", Material: "Galvanized Steel", Type: "Z/C Purlin" },
   bulkPricing: [
     { min: 1, max: 10, price: 310 },
@@ -584,8 +683,8 @@ const PRODUCTS = [
   category: "Roof Cladding",
   name: "Roofing Accessories",
   price: 90,
-  img: "/products/accessories.jpg",
-  images: ["/products/accessories.jpg", "/products/accessories2.jpg"],
+  img: "/Roofing Accessories.jpg",
+  images: ["/Roofing Accessories.jpg", "/Roofing Accessories.jpg"],
   specs: { Type: "Fasteners, Clips, Sealants" },
   bulkPricing: [
     { min: 1, max: 10, price: 90 },
@@ -598,8 +697,8 @@ const PRODUCTS = [
   category: "Roof Cladding",
   name: "Translucent Sheet",
   price: 200,
-  img: "/products/translucent.jpg",
-  images: ["/products/translucent.jpg", "/products/translucent2.jpg"],
+  img: "/Translucent Sheet.jpg",
+  images: ["/Translucent Sheet.jpg", "/Translucent Sheet.jpg"],
   specs: { Length: "6m", Material: "Polycarbonate", Thickness: "2mm" },
   bulkPricing: [
     { min: 1, max: 10, price: 200 },
@@ -608,122 +707,9 @@ const PRODUCTS = [
   ],
 },
 
-// ================= Fencing =================
-{
-  id: "temporary-hoarding",
-  category: "Fencing",
-  name: "Temporary Hoarding Panels",
-  price: 100,
-  img: "/Temporary Hoarding Panels.jpg",
-  images: ["/Temporary Hoarding Panels.jpg", "/Temporary Hoarding Panels.jpg"],
-  specs: { Height: "2m", Material: "Galvanized Steel" },
-  bulkPricing: [
-    { min: 1, max: 10, price: 100 },
-    { min: 11, max: 50, price: 95 },
-    { min: 51, max: 9999, price: 90 },
-  ],
-},
-{
-  id: "high-security-fence",
-  category: "Fencing",
-  name: "High Security Chain Link Fence",
-  price: 300,
-  img: "/High Security Chain Link Fence.jpg",
-  images: ["/High Security Chain Link Fence.jpg", "/High Security Chain Link Fence.jpg"],
-  specs: { Height: "2.5m", Material: "Steel", Coating: "Galvanized" },
-  bulkPricing: [
-    { min: 1, max: 10, price: 300 },
-    { min: 11, max: 50, price: 290 },
-    { min: 51, max: 9999, price: 280 },
-  ],
-},
-{
-  id: "chain-link-gate",
-  category: "Fencing",
-  name: "Chain Link Fence Gate",
-  price: 200,
-  img: "/products/chain-link-gate.jpg",
-  images: ["/products/chain-link-gate.jpg", "/products/chain-link-gate2.jpg"],
-  specs: { Width: "3m", Material: "Steel", Coating: "Galvanized" },
-  bulkPricing: [
-    { min: 1, max: 10, price: 200 },
-    { min: 11, max: 50, price: 190 },
-    { min: 51, max: 9999, price: 180 },
-  ],
-},
-{
-  id: "chain-link-fence",
-  category: "Fencing",
-  name: "Chain Link Fence",
-  price: 180,
-  img: "/products/chain-link-fence.jpg",
-  images: ["/products/chain-link-fence.jpg", "/products/chain-link-fence2.jpg"],
-  specs: { Height: "2m", Material: "Steel", Coating: "Galvanized" },
-  bulkPricing: [
-    { min: 1, max: 10, price: 180 },
-    { min: 11, max: 50, price: 170 },
-    { min: 51, max: 9999, price: 160 },
-  ],
-},
-{
-  id: "sand-barrier-fence",
-  category: "Fencing",
-  name: "Sand Barrier Fence",
-  price: 150,
-  img: "/products/sand-barrier-fence.jpg",
-  images: ["/products/sand-barrier-fence.jpg", "/products/sand-barrier-fence2.jpg"],
-  specs: { Height: "1.5m", Material: "Steel", Coating: "Galvanized" },
-  bulkPricing: [
-    { min: 1, max: 10, price: 150 },
-    { min: 11, max: 50, price: 145 },
-    { min: 51, max: 9999, price: 140 },
-  ],
-},
-{
-  id: "fence-wires",
-  category: "Fencing",
-  name: "Fence Wires & Accessories",
-  price: 90,
-  img: "/products/fence-wires.jpg",
-  images: ["/products/fence-wires.jpg", "/products/fence-wires2.jpg"],
-  specs: { Type: "Wire Rolls, Clips, Fasteners", Material: "Steel" },
-  bulkPricing: [
-    { min: 1, max: 10, price: 90 },
-    { min: 11, max: 50, price: 85 },
-    { min: 51, max: 9999, price: 80 },
-  ],
-},
-{
-  id: "playground-fence",
-  category: "Fencing",
-  name: "Playground Chain Link Fence",
-  price: 220,
-  img: "/products/playground-fence.jpg",
-  images: ["/products/playground-fence.jpg", "/products/playground-fence2.jpg"],
-  specs: { Height: "2m", Material: "Steel", Coating: "Galvanized" },
-  bulkPricing: [
-    { min: 1, max: 10, price: 220 },
-    { min: 11, max: 50, price: 210 },
-    { min: 51, max: 9999, price: 200 },
-  ],
-},
-{
-  id: "wall-mounted-fence",
-  category: "Fencing",
-  name: "Wall Mounted Chain Link Fence",
-  price: 250,
-  img: "/products/wall-mounted-fence.jpg",
-  images: ["/products/wall-mounted-fence.jpg", "/products/wall-mounted-fence2.jpg"],
-  specs: { Height: "2m", Material: "Steel", Coating: "Galvanized" },
-  bulkPricing: [
-    { min: 1, max: 10, price: 250 },
-    { min: 11, max: 50, price: 240 },
-    { min: 51, max: 9999, price: 230 },
-  ],
-},
 
 ];
-const CATEGORIES = ["All", "Aluminium", "Mild Steel", "Building", "Roof Cladding", "Fencing"];
+const CATEGORIES = ["All","Fencing","Roof Cladding", "Aluminium", "Mild Steel", "Building"];
 
 // ==============================
 // SEO
