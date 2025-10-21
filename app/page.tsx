@@ -816,16 +816,102 @@ function MobileMenu({ open, onClose, orderCount, scrollToOrder }) {
 // ==============================
 // HERO
 // ==============================
-function Hero() {
+// function Hero() {
+//   return (
+//     <section className="relative text-white bg-cover bg-center" style={{ backgroundImage: "url('/hero-bg.jpg')" }}>
+//       <div className="absolute inset-0 bg-black/50" />
+//       <div className="relative max-w-7xl mx-auto px-6 py-24 text-center">
+//         <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-4xl md:text-6xl font-extrabold">{COMPANY.name}</motion.h1>
+//         <p className="mt-4 text-lg max-w-2xl mx-auto">{COMPANY.tagline}</p>
+//         <div className="mt-6 flex justify-center gap-3">
+//           <a href={`https://wa.me/${COMPANY.whatsapp}`} target="_blank" className="px-6 py-3 bg-green-600 text-white rounded-md font-semibold">Chat on WhatsApp</a>
+//           <a href="#products" className="px-6 py-3 border rounded-md text-white">View Products</a>
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
+
+import Slider from 'react-slick';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+const images = [
+  '/hero-bg.jpg',
+  '/hero-bg1.webp',
+  '/hero-bg2.jpg'
+];
+
+const sliderSettings = {
+  dots: false,
+  infinite: true,
+  speed: 2000,             // Duration of fade transition
+  autoplay: true,
+  autoplaySpeed: 1,        // Minimal delay between slides
+  fade: true,
+  arrows: false,
+  pauseOnHover: false,
+  cssEase: "linear"        // Smooth continuous fade
+};
+
+
+ function Hero() {
   return (
-    <section className="relative text-white bg-cover bg-center" style={{ backgroundImage: "url('/hero-bg.jpg')" }}>
-      <div className="absolute inset-0 bg-black/50" />
-      <div className="relative max-w-7xl mx-auto px-6 py-24 text-center">
-        <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-4xl md:text-6xl font-extrabold">{COMPANY.name}</motion.h1>
-        <p className="mt-4 text-lg max-w-2xl mx-auto">{COMPANY.tagline}</p>
-        <div className="mt-6 flex justify-center gap-3">
-          <a href={`https://wa.me/${COMPANY.whatsapp}`} target="_blank" className="px-6 py-3 bg-green-600 text-white rounded-md font-semibold">Chat on WhatsApp</a>
-          <a href="#products" className="px-6 py-3 border rounded-md text-white">View Products</a>
+    <section className="relative w-full h-screen overflow-hidden">
+      <Slider {...sliderSettings}>
+        {images.map((src, index) => (
+          <div key={index} className="w-full h-screen">
+            <div
+              className="w-full h-full bg-cover bg-center"
+              style={{ backgroundImage: `url(${src})` }}
+            >
+              <div className="absolute inset-0 bg-black/60 z-10" />
+            </div>
+          </div>
+        ))}
+      </Slider>
+
+      <div className="absolute inset-0 flex items-center justify-center z-20 px-6 text-center">
+        <div className="max-w-4xl mx-auto">
+          <motion.h1
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+            className="text-4xl md:text-6xl font-extrabold text-white"
+          >
+            {COMPANY.name}
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 1 }}
+            className="mt-4 text-lg md:text-xl text-white max-w-2xl mx-auto"
+          >
+            {COMPANY.tagline}
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 1 }}
+            className="mt-8 flex flex-wrap justify-center gap-4"
+          >
+            <a
+              href={`https://wa.me/${COMPANY.whatsapp}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-md font-semibold transition duration-300"
+            >
+              Chat on WhatsApp
+            </a>
+            <a
+              href="#products"
+              className="px-6 py-3 border border-white text-white rounded-md hover:bg-white hover:text-black transition duration-300"
+            >
+              View Products
+            </a>
+          </motion.div>
         </div>
       </div>
     </section>
