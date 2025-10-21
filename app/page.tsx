@@ -528,7 +528,7 @@ const PRODUCTS = [
   category: "Roof Cladding",
   name: "PUR Wall Panel",
   price: 380,
-  img: "/products/pur-wall.jpg",
+  img: "/Alu-Zinc Profile Sheet.jpg",
   images: ["/products/pur-wall.jpg", "/products/pur-wall2.jpg"],
   specs: { Thickness: "40mm", Core: "PUR Foam", Facing: "Galvanized Steel" },
   bulkPricing: [
