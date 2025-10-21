@@ -202,7 +202,7 @@ export function Nav({ orderCount }: NavbarProps) {
 // COMPANY DATA
 // ==============================
 export const COMPANY = {
-  name: "Silver Metal Industry",
+  name: "Silver Metal Industry LLC",
   location: "Sharjah, UAE",
   whatsapp: "+971526551620",
   email: "mdrocktrader@gmail.com",
