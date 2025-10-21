@@ -1495,7 +1495,7 @@ function Contact() {
 // ==============================
 
 
-export function Footer() {
+function Footer() {
   const socialLinks = [
     { name: "Facebook", icon: <FaFacebookF />, url: COMPANY.facebook },
     { name: "Instagram", icon: <FaInstagram />, url: COMPANY.instagram },
