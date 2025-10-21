@@ -2,16 +2,14 @@
 
 import React, { useState, useMemo, useRef } from "react";
 import Head from "next/head";
-import { AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Search, ShoppingCart } from "lucide-react";
 import { saveAs } from "file-saver";
 import { Document, Packer, Paragraph, TextRun } from "docx";
 import { jsPDF } from "jspdf";
 import Zoom from "react-medium-image-zoom";
-import 'react-medium-image-zoom/dist/styles.css';
-// import { FaFacebookF, FaInstagram, FaLinkedinIn, FaYoutube, FaWhatsapp } from "react-icons/fa";
-// At the very top of your file
-import { motion } from "framer-motion";
+import "react-medium-image-zoom/dist/styles.css";
+
 import { 
   FaFacebookF, 
   FaInstagram, 
