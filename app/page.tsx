@@ -133,7 +133,7 @@ function Nav({ orderCount }: NavbarProps) {
             </button>
 
             <a
-              href="https://wa.me/+971526551620"
+              href="https://wa.me/971526551620"
               target="_blank"
               rel="noreferrer"
               className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition"
